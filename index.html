@@ -144,6 +144,17 @@
     .prog-card .meta { font-family: var(--font-data); font-size: 13px; color: var(--gray); border-top: 1px solid var(--border); padding-top: 14px; }
     .prog-card .meta b { color: var(--green-dark); }
     .badge-feature { display: inline-block; font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--white); background: var(--gold); padding: 3px 10px; border-radius: 100px; margin-bottom: 12px; }
+    .prog-foot { text-align: center; margin-top: 40px; }
+    .prog-foot p { max-width: 680px; margin: 0 auto 20px; font-size: 15.5px; color: var(--gray); line-height: 1.75; }
+
+    /* ─── CREDIBILITY GALLERY ────────────────────── */
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 38px; }
+    .gallery-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); margin: 0; }
+    .gallery-item img { width: 100%; height: 200px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
+    .gallery-ph { height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: var(--green-bg); color: var(--green); text-align: center; padding: 16px; border-bottom: 1px dashed var(--border); }
+    .gallery-ph .ic { font-size: 32px; line-height: 1; }
+    .gallery-ph .t { font-family: var(--font-head); font-weight: 700; font-size: 13px; line-height: 1.4; }
+    .gallery-cap { padding: 14px 16px; font-size: 13px; color: var(--gray); line-height: 1.6; }
 
     /* ─── COACH ──────────────────────────────────── */
     .coach-grid { display: grid; grid-template-columns: 280px 1fr; gap: 44px; align-items: start; margin-top: 12px; }
@@ -212,6 +223,7 @@
     @media (max-width: 900px) {
       .prog-grid { grid-template-columns: 1fr 1fr; }
       .map-track { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
       .coach-grid { grid-template-columns: 1fr; gap: 28px; }
       .coach-photo { max-width: 240px; }
     }
@@ -232,6 +244,7 @@
     @media (max-width: 560px) {
       .prog-grid { grid-template-columns: 1fr; }
       .map-track { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
       .hero { padding: 56px 0 44px; }
       .hero h1 { font-size: 26px; }
       .hero .subtitle { font-size: 15px; }
@@ -370,7 +383,7 @@
           <h3>GreenWay Kickstart</h3>
           <div class="stage-lbl">Explorer — "Người tìm kiếm"</div>
           <p class="promise">Biết chắc bước đi đầu tiên đúng — trước khi mất $20K–$50K vì quyết định sai. Kết thúc bằng quyết định Go/No-Go rõ ràng.</p>
-          <div class="meta"><b>4 tuần</b> · Group coaching 5–10 HV · <b>$997</b></div>
+          <div class="meta"><b>4 tuần</b> · Group coaching 5–10 HV · Kết thúc bằng quyết định Go/No-Go</div>
         </div>
 
         <div class="prog-card">
@@ -378,7 +391,7 @@
           <h3>GreenWay Launch</h3>
           <div class="stage-lbl">Explorer → Growing</div>
           <p class="promise">Từ sản phẩm trên tay đến đơn hàng đầu tiên trên Amazon — có coach đi cùng từng bước build, launch và 30 ngày đầu chạy Ads.</p>
-          <div class="meta"><b>4–5 tháng</b> · Coaching 1-on-1 · <b>$2,997</b></div>
+          <div class="meta"><b>4–5 tháng</b> · Coaching 1-on-1 · Đồng hành đến khi SP live</div>
         </div>
 
         <div class="prog-card feature">
@@ -387,7 +400,7 @@
           <h3>GreenWay Profit Maximizer</h3>
           <div class="stage-lbl">Growing — "Người chiến đấu"</div>
           <p class="promise">Ngừng mất tiền vô ích — thấy kết quả thay đổi thực sự trong 30 ngày đầu tiên. Soi và fix profit leak đang giết margin của bạn.</p>
-          <div class="meta"><b>4 tuần</b> · 8 buổi Input + Output · <b>Cohort T9/2026</b></div>
+          <div class="meta"><b>4 tuần</b> · 8 buổi Input + Output · Cohort gần nhất: T9/2026</div>
         </div>
 
         <div class="prog-card">
@@ -395,7 +408,7 @@
           <h3>GreenWay Profit System</h3>
           <div class="stage-lbl">Emerging — "Người xây dựng"</div>
           <p class="promise">Xây hệ thống Amazon profitable — để bạn ngừng canh Ads mỗi ngày, chỉ còn 2–3h/tuần mà vận hành vẫn ổn định.</p>
-          <div class="meta"><b>12 tuần</b> · Group + 2× 1-on-1 · <b>$3,997</b></div>
+          <div class="meta"><b>12 tuần</b> · Group calls + 2× 1-on-1 · Hệ thống vận hành hoàn chỉnh</div>
         </div>
 
         <div class="prog-card">
@@ -403,7 +416,7 @@
           <h3>GreenWay Profit Scale</h3>
           <div class="stage-lbl">Achiever — "Người vận hành"</div>
           <p class="promise">Từ 6-figure lên 7-figure — với team, hệ thống và tự do thời gian. Full khung 3M: Map + Money + Machine.</p>
-          <div class="meta"><b>6 tháng</b> · Bi-weekly 1-on-1 + Mastermind · <b>$12,997</b></div>
+          <div class="meta"><b>6 tháng</b> · Bi-weekly 1-on-1 + Mastermind · Full khung 3M</div>
         </div>
 
         <div class="prog-card">
@@ -411,8 +424,13 @@
           <h3>GreenWay Profit Club</h3>
           <div class="stage-lbl">Master — "Người dẫn dắt"</div>
           <p class="promise">Cộng đồng peers cùng đẳng cấp — để bạn không phải đi một mình ở đỉnh. Mastermind, hot seat, cập nhật thị trường.</p>
-          <div class="meta">Alumni · Mastermind hàng tháng · <b>$397/tháng</b></div>
+          <div class="meta">Dành cho Alumni · Mastermind & hot seat hàng tháng</div>
         </div>
+      </div>
+
+      <div class="prog-foot">
+        <p>Mỗi chương trình có mức đầu tư tương ứng với chiều sâu đồng hành. Chúng tôi chia sẻ học phí cụ thể trong buổi tư vấn — sau khi xác định đúng giai đoạn và chương trình phù hợp với bạn.</p>
+        <button class="btn btn-primary" onclick="openApplyModal()">Nhận tư vấn lộ trình & học phí</button>
       </div>
     </div>
   </section>
@@ -442,6 +460,37 @@
             <p>"Những gì tôi chỉ cho học viên là hệ thống tôi đã dùng để fix chính mình — Profit-First Thinking, tái cấu trúc Ads theo mục tiêu, ra quyết định theo data. Tôi không bán giấc mơ giàu nhanh. Tôi giúp bạn xây một business đứng vững."</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CREDIBILITY GALLERY ═══ -->
+  <section class="section section-alt" id="uy-tin">
+    <div class="container">
+      <span class="tag">Uy tín thực tế</span>
+      <h2>Trên sân khấu giải thưởng và tại các sự kiện chính thức của Amazon.</h2>
+      <p class="lead" style="max-width:780px;">EGW không chỉ dạy online. Chúng tôi được vinh danh tại các giải thưởng ngành và chia sẻ trực tiếp tại sự kiện của Amazon Global Selling — đó là chiều sâu thực chiến đứng sau mỗi chương trình.</p>
+
+      <!-- LƯU Ý cho anh Bình: thả ảnh thật vào assets/ rồi đổi src + alt + figcaption.
+           Tên file gợi ý: gala-giai-case.webp · dien-gia-amazon-event.webp · the-rising-voice.webp · dao-tao-hoc-vien.webp
+           Khi chưa có ảnh, ô hiển thị placeholder brand (không bị vỡ). Nên dùng ảnh ngang ~1200×800, .webp <150KB. -->
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <div class="gallery-ph" data-cap="Ảnh nhận giải"><span class="ic">🏆</span><span class="t">Ảnh nhận giải Giải Case 2025</span></div>
+          <figcaption class="gallery-cap">Vinh danh "Giải Case" 2025 — ghi nhận năng lực giải bài toán thực chiến.</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-ph" data-cap="Ảnh diễn giả"><span class="ic">🎤</span><span class="t">Diễn giả tại sự kiện Amazon</span></div>
+          <figcaption class="gallery-cap">Chia sẻ trên sân khấu sự kiện Amazon Global Selling Vietnam.</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-ph" data-cap="Ảnh The Rising Voice"><span class="ic">🌟</span><span class="t">The Rising Voice 2025</span></div>
+          <figcaption class="gallery-cap">Được vinh danh The Rising Voice 2025.</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-ph" data-cap="Ảnh đào tạo"><span class="ic">👥</span><span class="t">Đào tạo & coaching học viên</span></div>
+          <figcaption class="gallery-cap">Trực tiếp đồng hành cùng học viên qua các buổi coaching thực chiến.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
