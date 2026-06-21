@@ -156,6 +156,17 @@
     .gallery-ph .t { font-family: var(--font-head); font-weight: 700; font-size: 13px; line-height: 1.4; }
     .gallery-cap { padding: 14px 16px; font-size: 13px; color: var(--gray); line-height: 1.6; }
 
+    /* ─── FAQ ────────────────────────────────────── */
+    .faq-list { max-width: 760px; margin: 38px auto 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q { width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 20px 38px 20px 0; font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--gray-dark); position: relative; line-height: 1.5; }
+    .faq-q::after { content: '+'; position: absolute; right: 4px; top: 16px; font-size: 24px; color: var(--green); font-weight: 600; }
+    .faq-item.open .faq-q::after { content: '\2212'; }
+    .faq-a { display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-a p { color: var(--gray); font-size: 15px; line-height: 1.75; padding: 0 0 22px; margin: 0; }
+    .faq-a p strong { color: var(--gray-dark); }
+
     /* ─── COACH ──────────────────────────────────── */
     .coach-grid { display: grid; grid-template-columns: 280px 1fr; gap: 44px; align-items: start; margin-top: 12px; }
     .coach-photo { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
@@ -275,7 +286,7 @@
   <!-- ═══ HERO ═══ -->
   <header class="hero" id="top">
     <div class="container">
-      <p class="eyebrow">Học viện Amazon FBA · Đối tác Amazon Global Selling Vietnam</p>
+      <p class="eyebrow">Cho seller Amazon: doanh thu có — nhưng lợi nhuận mỏng và bấp bênh</p>
       <h1>Xây hệ thống Amazon <em>profitable</em> — để bạn ngừng canh Ads mỗi ngày và vận hành như chủ doanh nghiệp.</h1>
       <p class="subtitle">ECom GreenWay đồng hành cùng nhà bán hàng Amazon FBA tại Việt Nam xây hệ thống kinh doanh ra quyết định theo data — từ người mới chưa có sản phẩm đến seller 7-figure có team, có hệ thống, có tự do thời gian.</p>
       <div class="hero-cta-group">
@@ -283,6 +294,7 @@
         <a href="#lo-trinh" class="btn btn-outline-light btn-lg">Xem lộ trình của bạn</a>
       </div>
       <p class="hero-note">Nhận học viên chọn lọc · Đồng hành 1:1 giới hạn số lượng mỗi đợt</p>
+      <p class="hero-note" style="margin-top:8px;">Không pitch, không ép · 15 phút để xác định giai đoạn của bạn</p>
     </div>
   </header>
 
@@ -451,7 +463,7 @@
         </div>
         <div>
           <ul class="coach-points">
-            <li><b>Result:</b> Net Profit <span class="text-gold">+130% MTD</span> (tháng 3/2026) trên chính tài khoản Amazon đang vận hành — số liệu Sellerboard thật.</li>
+            <li><b>Result:</b> Từng để lợi nhuận giảm 70% (nửa đầu 2025), rồi rà lại hệ thống và phục hồi lên <span class="text-gold">Net Profit +130%</span> (Sellerboard, tháng 3/2026) trên chính tài khoản Amazon đang vận hành.</li>
             <li><b>Credentials:</b> Đối tác đào tạo chính thức của <b>Amazon Global Selling Vietnam</b>. Giải <b>The Rising Voice 2025</b> và <b>Giải Case 2025</b>.</li>
             <li><b>Investment:</b> Đã trả học phí bằng tiền thật — từng để doanh số tăng nhưng lợi nhuận tụt mạnh, rồi tự rà lại toàn bộ hệ thống để phục hồi profit.</li>
             <li><b>Testimonial:</b> Học viên thật ra kết quả đo được — không phải lời hứa (xem ngay bên dưới).</li>
@@ -550,7 +562,7 @@
           <h3>✅ Phù hợp nếu bạn</h3>
           <ul>
             <li>Là nhà bán hàng / doanh nghiệp sản xuất muốn làm Amazon FBA bài bản, dài hạn.</li>
-            <li>Đã có sản phẩm và đơn hàng, muốn tối ưu lợi nhuận và hệ thống hóa vận hành.</li>
+            <li>Đang bán trên Amazon và muốn tối ưu lợi nhuận, hệ thống hóa vận hành — <em>hoặc</em> chuẩn bị bắt đầu bài bản, không muốn mất $20K–$50K vì quyết định sai.</li>
             <li>Sẵn sàng ra quyết định theo data và làm thật theo từng gate.</li>
             <li>Muốn xây một business bền vững, không phụ thuộc 100% vào bản thân.</li>
           </ul>
@@ -563,6 +575,40 @@
             <li>Muốn một cam kết doanh thu chắc chắn thay vì một hệ thống ra quyết định.</li>
             <li>Chỉ muốn mua tài liệu để xem một mình, không cần coaching.</li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <span class="tag">Câu hỏi thường gặp</span>
+      <h2>Những điều seller hay băn khoăn trước khi bắt đầu.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Tôi chưa có sản phẩm, bắt đầu ở đâu?</button>
+          <div class="faq-a"><p>Bạn vào nhánh New Seller: <strong>Kickstart → Launch</strong> — xác định ngách, validate sản phẩm và ra quyết định Go/No-Go <strong>trước khi</strong> bỏ vốn lớn, để không mất $20K–$50K vì chọn sai.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Học phí bao nhiêu?</button>
+          <div class="faq-a"><p>Mỗi chương trình có mức đầu tư khác nhau theo chiều sâu đồng hành. Chúng tôi chia sẻ con số cụ thể trong buổi tư vấn — sau khi xác định đúng chương trình hợp với bạn, để bạn không trả cho thứ mình không cần.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">EGW có cam kết doanh thu không?</button>
+          <div class="faq-a"><p><strong>Không.</strong> Chúng tôi chịu trách nhiệm về <strong>hệ thống, quy trình và đồng hành</strong> — những thứ bạn kiểm soát được. Doanh số phụ thuộc thị trường và mức bạn thực thi. Đổi lại, bạn giữ lại toàn bộ tài sản: report, template, hệ thống vận hành — dù kết quả thế nào.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Mất bao lâu mới thấy kết quả?</button>
+          <div class="faq-a"><p>Tùy chương trình: Profit Maximizer nhắm thay đổi đo được trong <strong>~30 ngày đầu</strong>; Profit System xây hệ thống trong <strong>12 tuần</strong>. Mỗi chặng có cột mốc và gate kiểm tra rõ ràng.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Khác gì các khóa Amazon khác?</button>
+          <div class="faq-a"><p>Không phải khóa video xem một mình. Là coaching thật theo từng giai đoạn, dạy <strong>quy trình ra quyết định theo data</strong> — chính hệ thống Bình đã dùng để fix business của mình, không phải lý thuyết đi mượn.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Tôi bận, không có nhiều thời gian thì sao?</button>
+          <div class="faq-a"><p>Mục tiêu của hệ thống là <strong>giảm</strong> thời gian bạn tốn — từ canh Ads cả ngày xuống còn 2–3h/tuần. Lộ trình thiết kế để làm thật trong lúc vẫn đang vận hành business.</p></div>
         </div>
       </div>
     </div>
@@ -656,6 +702,8 @@
       if (e.target === document.getElementById('apply-modal')) closeApplyModal();
     }
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeApplyModal(); });
+
+    function toggleFaq(btn) { btn.parentElement.classList.toggle('open'); }
   </script>
 
 </body>
