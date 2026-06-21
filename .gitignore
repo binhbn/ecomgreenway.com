@@ -1,3 +1,9 @@
 .claude/
 _staging_dist/
 node_modules/
+# Ảnh gốc nặng (đã có bản .webp tối ưu) + tooling — không deploy lên live
+assets/*.jfif
+assets/binh-chia-se-*.jpg
+assets/hinh-anh-*.jpg
+assets/convert.js
+assets/package*.json
