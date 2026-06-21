@@ -134,7 +134,14 @@
     .map-hint { text-align: center; color: rgba(255,255,255,.8); font-size: 15px; margin-top: 30px; }
 
     /* ─── PROGRAMS GRID ──────────────────────────── */
-    .prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+    /* GREEN method strip */
+    .green-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; background: var(--green-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 22px; margin-top: 22px; }
+    .green-strip-lead { font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--green-dark); }
+    .green-steps { display: flex; flex-wrap: wrap; gap: 10px; }
+    .green-steps span { font-family: var(--font-head); font-weight: 600; font-size: 13px; color: var(--gray-dark); background: var(--white); border: 1px solid var(--border); border-radius: 100px; padding: 6px 14px; white-space: nowrap; }
+    .green-steps span b { color: var(--green); margin-right: 6px; }
+
+    .prog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 26px; }
     .prog-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
     .prog-card.feature { border: 2px solid var(--green); }
     .prog-card .lane { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
@@ -294,7 +301,7 @@
         <a href="#lo-trinh" class="btn btn-outline-light btn-lg">Xem lộ trình của bạn</a>
       </div>
       <p class="hero-note">Nhận học viên chọn lọc · Đồng hành 1:1 giới hạn số lượng mỗi đợt</p>
-      <p class="hero-note" style="margin-top:8px;">Không pitch, không ép · 15 phút để xác định giai đoạn của bạn</p>
+      <p class="hero-note" style="margin-top:8px;">Không pitch, không ép · 30 phút để xác định giai đoạn của bạn</p>
     </div>
   </header>
 
@@ -304,7 +311,7 @@
       <div class="trust-item"><div class="num">Amazon</div><div class="lbl">Đối tác Global Selling VN</div></div>
       <div class="trust-item"><div class="num">2025</div><div class="lbl">The Rising Voice</div></div>
       <div class="trust-item"><div class="num">2025</div><div class="lbl">Giải Case</div></div>
-      <div class="trust-item"><div class="num">6</div><div class="lbl">Chương trình theo từng giai đoạn</div></div>
+      <div class="trust-item"><div class="num">GREEN</div><div class="lbl">Phương pháp Profit Engine™</div></div>
     </div>
   </div>
 
@@ -342,7 +349,7 @@
           <h3>Explorer</h3>
           <div class="rev">&lt; $100K/năm</div>
           <p class="pain">"Người tìm kiếm" — sợ sai, sợ mất vốn, bơi trong thông tin.</p>
-          <span class="prog">Kickstart → Launch</span>
+          <span class="prog">Kickstart</span>
         </div>
         <div class="map-stage">
           <div class="step">Giai đoạn 2</div>
@@ -356,25 +363,25 @@
           <h3>Emerging</h3>
           <div class="rev">$200K–$500K</div>
           <p class="pain">"Người xây dựng" — có doanh thu nhưng canh Ads cả ngày, thiếu hệ thống.</p>
-          <span class="prog">Profit System</span>
+          <span class="prog">Profit Architect</span>
         </div>
         <div class="map-stage">
           <div class="step">Giai đoạn 4</div>
           <h3>Achiever</h3>
           <div class="rev">$500K–$2M</div>
           <p class="pain">"Người vận hành" — business phụ thuộc hoàn toàn vào mình.</p>
-          <span class="prog">Profit Scale</span>
+          <span class="prog">Profit Architect</span>
         </div>
         <div class="map-stage">
           <div class="step">Giai đoạn 5</div>
           <h3>Master</h3>
           <div class="rev">&gt; $2M/năm</div>
           <p class="pain">"Người dẫn dắt" — đơn độc ở đỉnh, cần peers cùng đẳng cấp.</p>
-          <span class="prog">Profit Club</span>
+          <span class="prog">Club</span>
         </div>
       </div>
 
-      <p class="map-hint">Chưa chắc mình ở đâu? <strong>Đặt một buổi tư vấn — 15 phút để xác định đúng giai đoạn và bước đi tiếp theo.</strong></p>
+      <p class="map-hint">Chưa chắc mình ở đâu? <strong>Đặt một buổi tư vấn 30 phút để xác định đúng giai đoạn và bước đi tiếp theo.</strong></p>
       <div class="text-center" style="margin-top:18px;">
         <button class="btn btn-gold btn-lg" onclick="openApplyModal()">Xác định giai đoạn của tôi</button>
       </div>
@@ -384,57 +391,53 @@
   <!-- ═══ PROGRAMS GRID ═══ -->
   <section class="section section-alt" id="chuong-trinh">
     <div class="container">
-      <span class="tag">6 chương trình · 1 lộ trình</span>
-      <h2>Mỗi chương trình giải quyết một bài toán cụ thể — bằng coaching thật, không phải khóa video xem một mình.</h2>
+      <span class="tag">Lộ trình đồng hành theo giai đoạn</span>
+      <h2>Bốn chặng đồng hành — chạy trên cùng một phương pháp, không phải khóa video xem một mình.</h2>
+      <p class="lead" style="max-width:780px;">Bắt đầu miễn phí với ebook <strong>Kiềng 3 chân</strong> — khung 3 trụ của một Amazon business có lãi — rồi đi sâu cùng coaching đúng giai đoạn bạn đang đứng.</p>
 
-      <!-- LƯU Ý cho anh Bình: giá đã ẩn theo hướng high-ticket — mỗi card chỉ nêu định dạng/thời lượng/kết quả,
-           dẫn về buổi tư vấn để chia sẻ học phí. Sửa nội dung từng card trong .meta nếu cần. -->
+      <div class="green-strip">
+        <span class="green-strip-lead">Phương pháp lõi <strong>GREEN Profit Engine™</strong></span>
+        <div class="green-steps">
+          <span><b>G</b> Soi Số</span>
+          <span><b>R</b> Cầm Máu</span>
+          <span><b>E</b> Dựng Nền</span>
+          <span><b>E</b> Bứt Tốc</span>
+          <span><b>N</b> Nâng Tầm</span>
+        </div>
+      </div>
+
+      <!-- LƯU Ý cho anh Bình (v4.0 — 06/2026): 4 chương trình + ebook free. Giá ẩn theo high-ticket.
+           Maximizer = core $997 (cohort T9/2026) · Architect = 1-1 bespoke, định giá qua discovery · Kickstart = park (theo thỏa thuận). -->
       <div class="prog-grid">
         <div class="prog-card">
-          <div class="lane">New Seller Lane · Decision</div>
+          <div class="lane">Explorer · Bắt đầu đúng</div>
           <h3>GreenWay Kickstart</h3>
-          <div class="stage-lbl">Explorer — "Người tìm kiếm"</div>
-          <p class="promise">Biết chắc bước đi đầu tiên đúng — trước khi mất $20K–$50K vì quyết định sai. Kết thúc bằng quyết định Go/No-Go rõ ràng.</p>
-          <div class="meta"><b>4 tuần</b> · Group coaching 5–10 HV · Kết thúc bằng quyết định Go/No-Go</div>
-        </div>
-
-        <div class="prog-card">
-          <div class="lane">New Seller Lane · Execution</div>
-          <h3>GreenWay Launch</h3>
-          <div class="stage-lbl">Explorer → Growing</div>
-          <p class="promise">Từ sản phẩm trên tay đến đơn hàng đầu tiên trên Amazon — có coach đi cùng từng bước build, launch và 30 ngày đầu chạy Ads.</p>
-          <div class="meta"><b>4–5 tháng</b> · Coaching 1-on-1 · Đồng hành đến khi SP live</div>
+          <div class="stage-lbl">"Người tìm kiếm" — chưa có / mới có sản phẩm</div>
+          <p class="promise">Biết chắc bước đi đầu tiên đúng — trước khi mất $20K–$50K vì quyết định sai — rồi đồng hành đến khi sản phẩm live trên Amazon.</p>
+          <div class="meta">Group · Quyết định Go/No-Go + đồng hành triển khai · Nhận theo thỏa thuận</div>
         </div>
 
         <div class="prog-card feature">
-          <span class="badge-feature">ENTRY · SCALING LANE</span>
-          <div class="lane">Scaling Seller Lane</div>
+          <span class="badge-feature">CORE · BẮT ĐẦU TỪ ĐÂY</span>
+          <div class="lane">Growing · Tối ưu lợi nhuận</div>
           <h3>GreenWay Profit Maximizer</h3>
-          <div class="stage-lbl">Growing — "Người chiến đấu"</div>
+          <div class="stage-lbl">"Người chiến đấu" — $100K–$200K/năm</div>
           <p class="promise">Ngừng mất tiền vô ích — thấy kết quả thay đổi thực sự trong 30 ngày đầu tiên. Soi và fix profit leak đang giết margin của bạn.</p>
-          <div class="meta"><b>4 tuần</b> · 8 buổi Input + Output · Mở theo cohort định kỳ</div>
+          <div class="meta"><b>4 tuần</b> · 8 buổi Input + Output (group) · Mở theo cohort định kỳ</div>
         </div>
 
         <div class="prog-card">
-          <div class="lane">Scaling Seller Lane · Signature</div>
-          <h3>GreenWay Profit System</h3>
-          <div class="stage-lbl">Emerging — "Người xây dựng"</div>
-          <p class="promise">Xây hệ thống Amazon profitable — để bạn ngừng canh Ads mỗi ngày, chỉ còn 2–3h/tuần mà vận hành vẫn ổn định.</p>
-          <div class="meta"><b>12 tuần</b> · Group calls + 2× 1-on-1 · Hệ thống vận hành hoàn chỉnh</div>
+          <div class="lane">Emerging → Achiever · Hệ thống & tự do</div>
+          <h3>GreenWay Profit Architect</h3>
+          <div class="stage-lbl">"Người xây dựng" → "Người vận hành"</div>
+          <p class="promise">Thiết kế cỗ máy profitable riêng cho business của bạn — đưa bạn từ thợ chính thành ông chủ có team, có hệ thống, có tự do thời gian.</p>
+          <div class="meta"><b>1-on-1 thiết kế riêng</b> · 6–12 tháng · Tối đa 3 khách đồng thời</div>
         </div>
 
         <div class="prog-card">
-          <div class="lane">Scaling Seller Lane · Premium</div>
-          <h3>GreenWay Profit Scale</h3>
-          <div class="stage-lbl">Achiever — "Người vận hành"</div>
-          <p class="promise">Từ 6-figure lên 7-figure — với team, hệ thống và tự do thời gian. Full khung 3M: Map + Money + Machine.</p>
-          <div class="meta"><b>6 tháng</b> · Bi-weekly 1-on-1 + Mastermind · Full khung 3M</div>
-        </div>
-
-        <div class="prog-card">
-          <div class="lane">Continuity</div>
-          <h3>GreenWay Profit Club</h3>
-          <div class="stage-lbl">Master — "Người dẫn dắt"</div>
+          <div class="lane">Master · Cộng đồng</div>
+          <h3>GreenWay Club</h3>
+          <div class="stage-lbl">"Người dẫn dắt" — dành cho alumni</div>
           <p class="promise">Cộng đồng peers cùng đẳng cấp — để bạn không phải đi một mình ở đỉnh. Mastermind, hot seat, cập nhật thị trường.</p>
           <div class="meta">Dành cho Alumni · Mastermind & hot seat hàng tháng</div>
         </div>
@@ -588,7 +591,7 @@
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Tôi chưa có sản phẩm, bắt đầu ở đâu?</button>
-          <div class="faq-a"><p>Bạn vào nhánh New Seller: <strong>Kickstart → Launch</strong> — xác định ngách, validate sản phẩm và ra quyết định Go/No-Go <strong>trước khi</strong> bỏ vốn lớn, để không mất $20K–$50K vì chọn sai.</p></div>
+          <div class="faq-a"><p>Bạn vào nhánh <strong>Kickstart</strong> — xác định ngách, validate sản phẩm và ra quyết định Go/No-Go <strong>trước khi</strong> bỏ vốn lớn (để không mất $20K–$50K vì chọn sai), rồi được đồng hành triển khai đến khi sản phẩm live.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Học phí bao nhiêu?</button>
@@ -600,7 +603,7 @@
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Mất bao lâu mới thấy kết quả?</button>
-          <div class="faq-a"><p>Tùy chương trình: Profit Maximizer nhắm thay đổi đo được trong <strong>~30 ngày đầu</strong>; Profit System xây hệ thống trong <strong>12 tuần</strong>. Mỗi chặng có cột mốc và gate kiểm tra rõ ràng.</p></div>
+          <div class="faq-a"><p>Tùy chương trình: Profit Maximizer nhắm thay đổi đo được trong <strong>~30 ngày đầu</strong>; Profit Architect là lộ trình 1-1 thiết kế riêng <strong>6–12 tháng</strong> để xây hệ thống và nâng tầm Owner. Mỗi chặng có cột mốc và gate kiểm tra rõ ràng.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Khác gì các khóa Amazon khác?</button>
