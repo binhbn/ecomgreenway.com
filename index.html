@@ -194,6 +194,15 @@
     .testi-stats .s .l { font-size: 12px; color: var(--gray); }
     .testi-card .quote { font-size: 15px; color: var(--gray-dark); line-height: 1.7; margin-bottom: 14px; }
     .testi-card .who { font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--gray-dark); }
+    .testi-card .role { font-size: 12.5px; color: var(--gray); margin-top: 3px; line-height: 1.5; }
+    .testi-video { position: relative; display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); margin-top: 16px; }
+    .testi-video img { width: 100%; display: block; }
+    .testi-video .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 54px; height: 54px; border-radius: 50%; background: rgba(46,94,26,.85); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; padding-left: 4px; transition: background .2s; }
+    .testi-video:hover .play-btn { background: var(--green); }
+    .testi-cap { display: block; font-family: var(--font-head); font-size: 12.5px; font-weight: 600; color: var(--green); margin-top: 8px; }
+    .testi-img { display: block; margin-top: 16px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); cursor: zoom-in; }
+    .testi-img img { width: 100%; display: block; }
+    .testi-img-cap { display: block; font-size: 12px; color: var(--gray); margin-top: 8px; font-family: var(--font-data); }
     .proof-img { margin-top: 40px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
     .proof-cap { font-size: 13px; color: var(--gray); text-align: center; margin-top: 12px; font-family: var(--font-data); }
 
@@ -540,8 +549,14 @@
             <div class="s"><div class="n">-6%</div><div class="l">ad spend</div></div>
             <div class="s"><div class="n">~1 tháng</div><div class="l">thời gian</div></div>
           </div>
-          <p class="quote">"Trước đây mình đổ ngân sách Ads dàn trải, không biết ASIN nào thật sự sinh lời. Sau khi soi lại theo hệ thống, mình cắt đúng chỗ chảy máu và dồn vào sản phẩm thắng."</p>
-          <div class="who">Team Mr. Hoàn — Amazon Seller</div>
+          <p class="quote">"Trước đây tụi em điều chỉnh một cách cảm tính, bây giờ điều chỉnh có mục tiêu hơn — nhìn từng nhóm sản phẩm là biết nên tiếp tục hay dừng đổ tiền vào đâu."</p>
+          <div class="who">Mai — vận hành Team Mr. Hoàn</div>
+          <div class="role">Amazon FBA Seller · doanh thu $10K+/tháng · từng lãi dưới 5%</div>
+          <a class="testi-video" href="https://www.youtube.com/watch?v=W5BztD5Zl5s" target="_blank" rel="noopener" aria-label="Xem video chia sẻ của Mai (Team Hoàn)">
+            <img src="https://img.youtube.com/vi/W5BztD5Zl5s/hqdefault.jpg" alt="Video testimonial Team Mr. Hoàn" loading="lazy" />
+            <span class="play-btn">▶</span>
+          </a>
+          <span class="testi-cap">▶ Xem Mai (Team Hoàn) chia sẻ trên video</span>
         </div>
 
         <div class="testi-card">
@@ -549,8 +564,13 @@
             <div class="s"><div class="n">+46%</div><div class="l">net profit</div></div>
             <div class="s"><div class="n">+21%</div><div class="l">revenue</div></div>
           </div>
-          <p class="quote">"Điều khác biệt không phải là biết thêm kỹ thuật, mà là có một quy trình ra quyết định rõ ràng mỗi tuần. Mình ngừng phản ứng theo cảm tính."</p>
-          <div class="who">Anh Tuyến — Amazon Seller</div>
+          <p class="quote">"Tâm đắc nhất không phải con số tăng bao nhiêu, mà là biết cách ứng dụng cho nhiều sản phẩm — vừa scale win, vừa tối ưu được lợi nhuận."</p>
+          <div class="who">T. T. Tuyến</div>
+          <div class="role">Amazon Seller ~2 năm · net margin 10–12% → ~20%</div>
+          <a class="testi-img" href="assets/tuyen-result-pm1.webp" target="_blank" rel="noopener" aria-label="Xem ảnh kết quả T. T. Tuyến">
+            <img src="assets/tuyen-result-pm1.webp" alt="Kết quả T. T. Tuyến — Revenue +21%, Net Profit +46% (số liệu trước/sau)" loading="lazy" />
+          </a>
+          <span class="testi-img-cap">Kết quả trước / sau — Revenue +21% · Net Profit +46% (bấm để xem lớn)</span>
         </div>
       </div>
 
