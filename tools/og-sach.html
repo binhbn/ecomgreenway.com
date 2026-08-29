@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  TEMPLATE ẢNH BÌA FACEBOOK cho trang /sach — 1200×630 px.
+  Đây KHÔNG phải trang web, chỉ là bản vẽ để chụp ra file ảnh PNG.
+
+  CÁCH DÙNG:
+    1. Sửa 2 chỗ [[ ]] bên dưới (tiêu đề + dòng dẫn)
+    2. Chạy:  powershell -File tools\render-og.ps1
+    3. Ảnh ra ở assets/og-sach.png, tự động đúng 1200×630
+
+  Không đưa file này lên bất kỳ đâu — nó chỉ để tạo ảnh.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green:       #4C8C2B;
+    --green-dark:  #2E5E1A;
+    --green-light: #A8D08D;
+    --gold:        #C9A24D;
+    --white:       #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: var(--green-dark); }
+
+  .canvas {
+    position: relative; width: 1200px; height: 630px;
+    background: var(--green-dark);
+    display: flex; align-items: center;
+    font-family: 'Inter', sans-serif;
+  }
+  /* Lớp sáng nhẹ phía sau — cùng thủ pháp với hero trang chủ */
+  .glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 22% 38%, rgba(76,140,43,.42) 0%, transparent 62%);
+  }
+  /* Vạch gold mảnh dưới cùng. Gold là tín hiệu, dùng ít — không làm nền lớn. */
+  .accent { position: absolute; left: 0; right: 0; bottom: 0; height: 7px; background: var(--gold); }
+
+  .left  { position: relative; z-index: 2; width: 730px; padding: 52px 0 52px 64px; }
+  .right { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+
+  /* Logo đặt trong nền trắng: chữ trong logo màu đen, để thẳng lên nền
+     xanh đậm sẽ không đọc được. */
+  .logo-pill {
+    display: inline-flex; align-items: center;
+    background: var(--white); border-radius: 100px;
+    padding: 11px 26px; margin-bottom: 38px;
+  }
+  .logo-pill img { height: 40px; width: auto; display: block; }
+
+  .eyebrow {
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: 20px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--green-light); margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
+    font-size: 60px; line-height: 1.14; color: var(--white);
+    letter-spacing: -.005em;
+  }
+  h1 em { font-style: normal; color: var(--gold); }
+
+  .url {
+    margin-top: 34px;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: 23px; color: var(--white);
+  }
+  .url span { color: var(--gold); }
+
+  .badge {
+    display: inline-block; margin-top: 26px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 100px; padding: 9px 20px;
+    font-size: 16.5px; color: rgba(255,255,255,.9);
+  }
+
+  .portrait {
+    width: 292px; height: 366px; border-radius: 14px; overflow: hidden;
+    border: 3px solid rgba(255,255,255,.22);
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+  .who      { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 25px; color: var(--white); text-align: center; }
+  .who-role { font-size: 16px; color: var(--green-light); text-align: center; margin-top: -12px; }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="glow"></div>
+    <div class="accent"></div>
+
+    <div class="left">
+      <div class="logo-pill">
+        <img src="../assets/Ecom Greenway Logo.png" alt="ECom GreenWay" />
+      </div>
+
+      <!-- DÒNG DẪN. Yêu cầu: ≤ 5 từ, IN HOA, nói đây là cái gì.
+           Nên trùng ý với dòng dẫn trên trang /sach. -->
+      <div class="eyebrow">[[DÒNG DẪN]]</div>
+
+      <!-- TIÊU ĐỀ. Yêu cầu: ≤ 12 từ, tối đa 3 dòng khi hiện ra.
+           Nên dùng ĐÚNG câu tiêu đề đã đặt trên trang /sach — người đọc thấy
+           ảnh rồi bấm vào, thấy lại đúng câu đó thì mới thấy nhất quán.
+           Bọc <em>…</em> quanh cụm muốn tô vàng (chỉ 1 cụm, đừng tô cả câu). -->
+      <h1>[[TIÊU ĐỀ]]</h1>
+
+      <div class="url">ecomgreenway.com<span>/sach</span></div>
+    </div>
+
+    <div class="right">
+      <div class="portrait">
+        <img src="../assets/binhbn-avatar-3.webp" alt="Bùi Ngọc Bình" />
+      </div>
+      <div class="who">Bùi Ngọc Bình</div>
+      <div class="who-role">Founder, ECom GreenWay</div>
+      <div class="badge">Amazon Global Selling VN · Đào tạo được liệt kê</div>
+    </div>
+  </div>
+</body>
+</html>

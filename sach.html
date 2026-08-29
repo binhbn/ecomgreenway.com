@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+  /sach — Trang đăng ký danh sách chờ nhận sách.
+  Đích đến của link đặt dưới 60 bài viết Facebook (thử thách viết sách).
+
+  LƯU Ý VẬN HÀNH:
+  · Trang này CHỈ TIẾNG VIỆT. Cố tình KHÔNG có nút VI/EN, KHÔNG dùng class
+    .vi/.en, KHÔNG đọc localStorage 'egw-lang'. Lý do: trang chủ ẩn/hiện chữ
+    bằng CSS theo <html lang>. Nếu trang này dùng cơ chế đó, người dùng từng
+    bấm EN ở trang chủ sẽ mở /sach ra thấy TRANG TRẮNG. Giữ nguyên như hiện tại.
+  · Trang tự chứa 100%: không phụ thuộc CSS/JS của index.html.
+  · Chữ trong [[ NGOẶC VUÔNG KÉP ]] là placeholder — thay bằng chữ thật,
+    và xoá luôn <span class="ph">…</span> bọc quanh nó.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tiêu đề tab trình duyệt + tiêu đề hiện khi dán link lên Facebook.
+       Yêu cầu: ≤ 60 ký tự, giữ đuôi "— ECom GreenWay" để nhận diện. -->
+  <title>[[TIÊU ĐỀ TRANG]] — ECom GreenWay</title>
+
+  <!-- Đoạn mô tả hiện dưới tiêu đề khi dán link lên Facebook.
+       Yêu cầu: 1–2 câu, 120–155 ký tự, nói lợi ích của việc đăng ký. -->
+  <meta name="description" content="[[MÔ TẢ NGẮN CHO FACEBOOK / GOOGLE]]" />
+
+  <link rel="icon" type="image/jpeg" href="assets/ECom GreenWay favicon.jpeg" />
+
+  <!-- ⚠️ XOÁ DÒNG NÀY TRƯỚC KHI CHẠY THẬT ⚠️
+       Đang chặn Google lập chỉ mục vì trang còn chữ placeholder [[ ]].
+       Điền xong hết chữ thì xoá dòng dưới, nếu không trang sẽ mãi không
+       xuất hiện trên Google. -->
+  <meta name="robots" content="noindex" />
+
+  <!-- Thẻ Open Graph: quyết định ảnh + chữ Facebook hiện ra khi dán link.
+       Ảnh assets/og-sach.png (1200×630) sinh ra từ tools/og-sach.html.
+       Muốn đổi ảnh: sửa chữ trong tools/og-sach.html rồi chạy
+       powershell -File tools\render-og.ps1 — đừng sửa file .png trực tiếp. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.ecomgreenway.com/sach" />
+  <meta property="og:title" content="[[TIÊU ĐỀ TRANG]] — ECom GreenWay" />
+  <meta property="og:description" content="[[MÔ TẢ NGẮN CHO FACEBOOK / GOOGLE]]" />
+  <meta property="og:image" content="https://www.ecomgreenway.com/assets/og-sach.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="vi_VN" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS của form Brevo. PHẢI đứng TRƯỚC thẻ <style> bên dưới thì phần ghi đè
+       theo màu/font EGW mới thắng. Đã kiểm tra file này (58KB): toàn bộ selector
+       nằm trong .sib-* nên không ảnh hưởng phần còn lại của trang. -->
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" />
+
+  <style>
+    /* ─── DESIGN TOKENS (đồng bộ index.html) ────────────────────── */
+    :root {
+      --green:       #4C8C2B;
+      --green-dark:  #2E5E1A;
+      --green-light: #A8D08D;
+      --green-bg:    #EEF5E8;
+      --gold:        #C9A24D;
+      --gray:        #6B6B6B;
+      --gray-dark:   #2B2B2B;
+      --gray-light:  #F5F5F5;
+      --white:       #FFFFFF;
+      --border:      #DDE8D4;
+
+      --font-head: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-data: 'Roboto Mono', monospace;
+
+      --radius: 8px;
+      --shadow: 0 2px 16px rgba(44,94,26,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--gray-dark);
+      background: var(--white);
+      -webkit-text-size-adjust: 100%;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Khung nội dung 1 cột — theo chuẩn trang con (privacy.html dùng 820px) */
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+
+    h1 { font-family: var(--font-head); font-weight: 800; line-height: 1.18; }
+    h2 { font-family: var(--font-head); font-weight: 700; line-height: 1.3; }
+    p  { color: var(--gray); }
+
+    .text-gold { color: var(--gold); font-family: var(--font-data); font-weight: 600; }
+
+    /* Đánh dấu chỗ cần điền chữ — xoá thẻ này khi đã điền xong */
+    .ph {
+      background: #FFF6DE; border: 1px dashed var(--gold); border-radius: 5px;
+      padding: 1px 7px; color: #7a5b16;
+      font-family: var(--font-head); font-weight: 600;
+    }
+
+    /* ─── HEADER RÚT GỌN ────────────────────────────────────────── */
+    /* Cố ý KHÔNG copy nav trang chủ: chỉ 1 đường về, không menu, không CTA phụ */
+    .topbar { border-bottom: 1px solid var(--border); background: var(--white); padding: 12px 0; }
+    .topbar .row { display: flex; align-items: center; justify-content: space-between; gap: 14px; max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar img { height: 40px; width: auto; }
+    .home-link { font-family: var(--font-head); font-weight: 600; font-size: 13px; color: var(--gray); white-space: nowrap; }
+    .home-link:hover { color: var(--green); }
+
+    /* ─── HERO / TIÊU ĐỀ TRANG ──────────────────────────────────── */
+    .hero { background: var(--green-dark); color: var(--white); padding: 44px 0 40px; }
+    .eyebrow { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green-light); margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(26px, 6.4vw, 40px); color: var(--white); }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+
+    /* ─── MÔ TẢ SÁCH ────────────────────────────────────────────── */
+    .intro { padding: 40px 0 8px; }
+    .intro p { font-size: 16.5px; line-height: 1.8; margin-bottom: 16px; }
+    .intro p:last-child { margin-bottom: 0; }
+
+    /* ─── AUTHORITY ─────────────────────────────────────────────── */
+    .authority { padding: 32px 0 40px; }
+    .auth-card { background: var(--green-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; }
+    .auth-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .auth-head img { width: 62px; height: 62px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: var(--shadow); }
+    .auth-name { font-family: var(--font-head); font-weight: 800; font-size: 18px; color: var(--gray-dark); line-height: 1.3; }
+    .auth-role { color: var(--green); font-weight: 600; font-size: 13.5px; }
+    .auth-points { list-style: none; display: grid; gap: 13px; }
+    .auth-points li { padding-left: 27px; position: relative; font-size: 15px; line-height: 1.65; color: var(--gray-dark); }
+    .auth-points li::before { content: '\2713'; position: absolute; left: 0; top: 0; color: var(--green); font-weight: 800; }
+    .auth-points li b { color: var(--green-dark); }
+    .verify-link { display: inline-block; margin-top: 16px; font-family: var(--font-head); font-weight: 700; font-size: 13.5px; color: var(--green); }
+    .verify-link:hover { text-decoration: underline; }
+
+    /* ─── KHỐI FORM ─────────────────────────────────────────────── */
+    .signup { padding: 0 0 48px; }
+    .form-card { background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--green); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px 20px 28px; }
+    .form-card h2 { font-size: 21px; color: var(--gray-dark); margin-bottom: 8px; }
+    .form-card .sub { font-size: 14.5px; margin-bottom: 22px; }
+    .form-note { font-size: 13px; color: var(--gray); margin-top: 16px; line-height: 1.6; }
+    .form-note a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ═══ FORM BREVO — GHI ĐÈ VỀ DESIGN SYSTEM EGW ═══════════════
+       Mọi selector dưới đây đều nằm trong .sib-form / #sib-form-container
+       nên KHÔNG rò rỉ sang phần còn lại của trang.
+       Dùng !important vì Brevo gắn style thẳng vào từng thẻ (inline style
+       luôn thắng CSS thường). Đã gỡ hết inline style trong HTML, phần
+       !important giữ lại để chặn CSS của sib-styles.css. */
+
+    /* Gỡ nền xám + khung viền mặc định, để form nằm gọn trong .form-card */
+    .sib-form { background: transparent !important; padding: 0 !important; text-align: left !important; }
+    #sib-form-container { max-width: none !important; }
+    #sib-container {
+      max-width: none !important; background: transparent !important;
+      border: none !important; border-radius: 0 !important;
+      padding: 0 !important; text-align: left !important; direction: ltr;
+    }
+
+    /* Font: Brevo mặc định Helvetica/Roboto → ép về Inter + Montserrat */
+    #sib-form-container, #sib-form-container * { font-family: var(--font-body) !important; }
+
+    /* Khoảng cách giữa các field */
+    #sib-form > div { padding: 0 0 20px !important; }
+    #sib-form > div:last-of-type { padding-bottom: 0 !important; }
+
+    /* Nhãn field */
+    #sib-form .entry__label {
+      display: block !important;
+      font-family: var(--font-head) !important; font-weight: 700 !important;
+      font-size: 14px !important; color: var(--gray-dark) !important;
+      text-align: left !important; margin-bottom: 8px !important;
+    }
+    #sib-form .entry__label::after { color: #B94444 !important; }
+
+    /* Ô nhập. font-size 16px là bắt buộc: dưới 16px iOS tự phóng to trang
+       khi bấm vào ô — lỗi hay gặp nhất trên traffic Facebook mobile. */
+    #sib-form .input {
+      width: 100% !important;
+      font-size: 16px !important; line-height: 1.5 !important;
+      color: var(--gray-dark) !important; background: var(--white) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: var(--radius) !important;
+      padding: 12px 14px !important;
+      box-shadow: none !important;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    #sib-form .input:focus {
+      outline: none !important;
+      border-color: var(--green) !important;
+      box-shadow: 0 0 0 3px rgba(76,140,43,.15) !important;
+    }
+    #sib-form .input::placeholder { color: #A9B4C0 !important; }
+
+    /* Dòng gợi ý nhỏ dưới ô nhập */
+    #sib-form .entry__specification {
+      display: block !important;
+      font-size: 12.5px !important; color: var(--gray) !important;
+      text-align: left !important; margin-top: 7px !important;
+    }
+
+    /* Báo lỗi từng field */
+    #sib-form .entry__error {
+      font-size: 13.5px !important; text-align: left !important;
+      color: #661d1d !important; background-color: #ffeded !important;
+      border-color: #B94444 !important; border-radius: var(--radius) !important;
+    }
+
+    /* Nhóm radio */
+    #sib-form .entry_mcq .entry__label { margin-bottom: 12px !important; }
+    #sib-form .entry__choice { margin-bottom: 11px !important; }
+    #sib-form .entry__choice label { display: flex !important; align-items: flex-start !important; gap: 10px !important; cursor: pointer; }
+    #sib-form .entry__choice span:not(.radio-button) {
+      font-size: 15px !important; line-height: 1.5 !important;
+      color: var(--gray-dark) !important;
+    }
+    /* Nút radio: Brevo mặc định xanh dương #0092ff → đổi sang xanh EGW */
+    .sib-form .radio-button {
+      width: 18px !important; height: 18px !important;
+      flex-shrink: 0 !important; margin: 2px 0 0 !important;
+      border-color: #B7C4CC !important;
+    }
+    .sib-form .input_replaced:checked + .radio-button { border-color: var(--green) !important; }
+    .sib-form .input_replaced:checked + .radio-button:before { background: var(--green) !important; }
+    .sib-form .input_replaced:focus + .radio-button { box-shadow: 0 0 0 3px rgba(76,140,43,.18) !important; }
+
+    /* Nút gửi */
+    #sib-form .sib-form-block__button {
+      width: 100% !important;
+      font-family: var(--font-head) !important;
+      font-weight: 700 !important; font-size: 16px !important;
+      color: var(--white) !important; background: var(--green) !important;
+      border: none !important; border-radius: var(--radius) !important;
+      padding: 15px 28px !important; text-align: center !important;
+      cursor: pointer; transition: opacity .2s, transform .15s;
+    }
+    #sib-form .sib-form-block__button:hover { opacity: .9; transform: translateY(-1px); }
+
+    /* reCAPTCHA. Ô captcha của Google rộng CỐ ĐỊNH 304px và không co lại được.
+       Trên iPhone 375px, sau khi trừ lề trang và lề khung form chỉ còn 295px
+       → captcha thò ra ngoài, kéo cả trang trượt ngang. Thu nhỏ lại cho vừa.
+       (Không thu nhỏ được bằng width vì bên trong là iframe của Google.) */
+    #sib-form .sib-captcha { margin-top: 4px; }
+    @media (max-width: 430px) {
+      #sib-form .g-recaptcha { transform: scale(.88); transform-origin: left top; }
+      /* Bù lại phần chiều cao hụt sau khi thu nhỏ (78px × 0.88 ≈ 69px) */
+      #sib-form .sib-captcha .form__label-row { height: 69px; overflow: hidden; }
+    }
+
+    /* Thông báo thành công / thất bại (JS của Brevo bật lên khi submit) */
+    #sib-form-container .sib-form-message-panel {
+      max-width: none !important; font-size: 15px !important;
+      text-align: left !important; border-radius: var(--radius) !important;
+      margin-bottom: 18px !important;
+    }
+    #sib-form-container #success-message {
+      color: #1F4210 !important; background-color: var(--green-bg) !important;
+      border-color: var(--green) !important;
+    }
+    #sib-form-container #error-message {
+      color: #661d1d !important; background-color: #ffeded !important;
+      border-color: #B94444 !important;
+    }
+
+    /* ─── FOOTER TỐI GIẢN ───────────────────────────────────────── */
+    .foot { border-top: 1px solid var(--border); padding: 22px 0 30px; text-align: center; }
+    .foot p { font-size: 13px; color: var(--gray); margin-bottom: 6px; }
+    .foot a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ─── DESKTOP (mobile-first: mặc định ở trên là bản mobile) ──── */
+    @media (min-width: 700px) {
+      .topbar { padding: 14px 0; }
+      .topbar img { height: 46px; }
+      .home-link { font-size: 14px; }
+      .hero { padding: 60px 0 54px; }
+      .intro { padding: 52px 0 8px; }
+      .intro p { font-size: 17px; }
+      .authority { padding: 36px 0 48px; }
+      .auth-card { padding: 32px 34px; }
+      .auth-head img { width: 74px; height: 74px; }
+      .auth-name { font-size: 20px; }
+      .form-card { padding: 34px 36px 36px; }
+      .form-card h2 { font-size: 24px; }
+      .signup { padding: 0 0 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ 1. HEADER RÚT GỌN ═══ -->
+  <header class="topbar">
+    <div class="row">
+      <a href="index.html" aria-label="ECom GreenWay — về trang chủ">
+        <img src="assets/Ecom Greenway Logo.png" alt="ECom GreenWay" />
+      </a>
+      <a href="index.html" class="home-link">Về trang chủ →</a>
+    </div>
+  </header>
+
+  <!-- ═══ 2. TIÊU ĐỀ TRANG ═══ -->
+  <section class="hero">
+    <div class="wrap">
+      <!-- Dòng dẫn phía trên tiêu đề.
+           Yêu cầu: ≤ 8 từ, nói ĐÂY LÀ CÁI GÌ (vd: một cuốn sách sắp ra mắt),
+           không phải lời quảng cáo. -->
+      <p class="eyebrow"><span class="ph">[[DÒNG DẪN]]</span></p>
+
+      <!-- Tiêu đề trang.
+           Yêu cầu: 1 câu, KHÔNG quá 12 từ. Nói VẤN ĐỀ CỦA NGƯỜI ĐỌC,
+           không nói tên sách. Muốn nhấn 1 cụm bằng màu gold thì bọc <em>…</em>
+           quanh cụm đó (vd: "<em>Cụm nhấn</em> — phần còn lại của câu."). -->
+      <h1><span class="ph">[[TIÊU ĐỀ]]</span></h1>
+    </div>
+  </section>
+
+  <!-- ═══ 3. MÔ TẢ NGẮN: SÁCH NÓI VỀ VẤN ĐỀ GÌ ═══ -->
+  <section class="intro">
+    <div class="wrap">
+      <!-- Đoạn 1. Yêu cầu: 2–3 câu, ≤ 60 từ. Gọi tên vấn đề người đọc đang gặp,
+           bằng chính ngôn ngữ họ hay dùng. Chưa nói về sách. -->
+      <p><span class="ph">[[ĐOẠN 1 — VẤN ĐỀ NGƯỜI ĐỌC ĐANG GẶP]]</span></p>
+
+      <!-- Đoạn 2. Yêu cầu: 2–3 câu, ≤ 60 từ. Sách giải quyết vấn đề đó theo
+           hướng nào. KHÔNG hứa kết quả bằng con số. KHÔNG dùng "bí quyết",
+           "giàu nhanh" — trái định vị thương hiệu. -->
+      <p><span class="ph">[[ĐOẠN 2 — SÁCH GIẢI QUYẾT VẤN ĐỀ ĐÓ THẾ NÀO]]</span></p>
+
+      <!-- Đoạn 3 (tuỳ chọn — không cần thì xoá cả thẻ <p> này).
+           Yêu cầu: 1 câu. Sách viết cho ai, và không viết cho ai. -->
+      <p><span class="ph">[[ĐOẠN 3 — SÁCH NÀY VIẾT CHO AI]]</span></p>
+    </div>
+  </section>
+
+  <!-- ═══ 4. AUTHORITY ═══ -->
+  <!-- Nội dung khối này LẤY NGUYÊN VĂN từ index.html (mục COACH / WHY EGW).
+       Không viết mới. Nếu sửa số liệu ở đây thì phải sửa đồng thời ở
+       index.html, nếu không hai trang sẽ nói vênh nhau. -->
+  <section class="authority">
+    <div class="wrap">
+      <div class="auth-card">
+        <div class="auth-head">
+          <img src="assets/binhbn-avatar-3.webp" alt="Mr. Bùi Ngọc Bình — Founder ECom GreenWay" loading="lazy" />
+          <div>
+            <div class="auth-name">Mr. Bùi Ngọc Bình</div>
+            <div class="auth-role">Founder, ECom GreenWay</div>
+          </div>
+        </div>
+
+        <ul class="auth-points">
+          <li><b>Credentials:</b> Nhà cung cấp dịch vụ đào tạo được <b>Amazon Global Selling Vietnam</b> liệt kê chính thức. Giải <b>The Rising Voice 2025</b> và <b>Hạng 1 Giải Case 2025</b> (Amazon).</li>
+          <li><b>Result:</b> Từng để lợi nhuận giảm 70% (nửa đầu 2025), rồi rà lại hệ thống và phục hồi lên <span class="text-gold">Net Profit +130%</span> (Sellerboard, tháng 3/2026) trên chính tài khoản Amazon đang vận hành.</li>
+          <li><b>Nguyên tắc:</b> Không bán giấc mơ giàu nhanh — dạy hệ thống ra quyết định theo data để xây một business đứng vững.</li>
+        </ul>
+
+        <a class="verify-link" href="https://sell.amazon.vn/nha-cung-cap-dich-vu/dao-tao-ban-hang" target="_blank" rel="noopener">Xác minh trên sell.amazon.vn →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 5. FORM BREVO ═══ -->
+  <section class="signup" id="dang-ky">
+    <div class="wrap">
+      <div class="form-card">
+        <!-- Tiêu đề khối form. Chữ này LẤY TỪ chính form Brevo của anh
+             (khối tiêu đề 32px), không phải tôi viết mới. Sửa thoải mái —
+             nhưng sửa ở ĐÂY, không sửa trong Brevo, vì khối tiêu đề gốc của
+             Brevo đã được gỡ khỏi form (xem ghi chú ở đầu <form> bên dưới). -->
+        <h2>Đăng ký danh sách chờ nhận sách từ Bùi Ngọc Bình</h2>
+
+        <!-- Câu dưới tiêu đề — cũng lấy từ form Brevo của anh. -->
+        <p class="sub">Ưu đãi đặc biệt cho 100 người đầu tiên đăng ký nhận sách từ Bình.</p>
+
+        <!-- ════════════════════════════════════════════════════════════
+             FORM BREVO (embed native, KHÔNG iframe).
+             Đã gỡ khỏi mã gốc của Brevo:
+               · 2 khối chữ tiêu đề + mô tả  → chuyển lên <h2> và <p class="sub">
+                 phía trên để dùng đúng font/màu EGW.
+               · Toàn bộ style="background-color:#EFF2F7" và khung viền xám
+                 → thay bằng .form-card của trang.
+             GIỮ NGUYÊN, KHÔNG ĐƯỢC SỬA: thuộc tính action của <form>, các
+             name="EMAIL" / name="LASTNAME" / name="PHAN_LOAI_AMAZON_SELLERS",
+             ô email_address_check (bẫy chống bot) và locale.
+             ════════════════════════════════════════════════════════════ -->
+        <div class="sib-form">
+          <div id="sib-form-container" class="sib-form-container">
+
+            <div id="error-message" class="sib-form-message-panel">
+              <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon"><path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" /></svg>
+                <span class="sib-form-message-panel__inner-text">Đăng ký không thành công. Vui lòng thử lại sau.</span>
+              </div>
+            </div>
+
+            <div id="success-message" class="sib-form-message-panel">
+              <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon"><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" /></svg>
+                <span class="sib-form-message-panel__inner-text">Bạn đã đăng ký thành công. Hãy chờ nhận thông tin update mới nhất từ Bình về cuốn sách này nhé.</span>
+              </div>
+            </div>
+
+            <div id="sib-container" class="sib-container--large sib-container--vertical">
+              <form id="sib-form" method="POST" action="https://56bfd3ab.sibforms.com/serve/MUIFAMXAXR8s1HzBAQiRrfICugVExvywIxLMCTUyKHJaQ12Ab4i_gKYnjwBheCAMjktH7dotpvTE0bFo3zm0qEt2KzrA3_Ibqdb7ExspBUxsprQ2Ag3-KxGH6qhcxVVP1HIBiryfkO2nL_mt3-iLUARjzBggMzA5ChMPnu71O_igVv8ilVntWXtQNAOQX5iOsusyBAM5NmtxuwJ2tw==" data-type="subscription">
+
+                <div>
+                  <div class="sib-input sib-form-block">
+                    <div class="form__entry entry_block">
+                      <div class="form__label-row">
+                        <label class="entry__label" for="EMAIL" data-required="*">Email</label>
+                        <div class="entry__field">
+                          <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" value="" placeholder="email@cua-ban.com" data-required="true" required />
+                        </div>
+                      </div>
+                      <label class="entry__error entry__error--primary"></label>
+                      <label class="entry__specification">Hãy cung cấp email của bạn để nhận thông tin sách. Ví dụ: abc@xyz.com</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="sib-input sib-form-block">
+                    <div class="form__entry entry_block">
+                      <div class="form__label-row">
+                        <label class="entry__label" for="LASTNAME" data-required="*">Họ và tên</label>
+                        <div class="entry__field">
+                          <input class="input" maxlength="200" type="text" id="LASTNAME" name="LASTNAME" autocomplete="name" placeholder="Họ tên" data-required="true" required />
+                        </div>
+                      </div>
+                      <label class="entry__error entry__error--primary"></label>
+                      <label class="entry__specification">VD: Bùi Ngọc Bình</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="sib-radiobutton-group sib-form-block">
+                    <div class="form__entry entry_mcq">
+                      <div class="form__label-row">
+                        <label class="entry__label" for="PHAN_LOAI_AMAZON_SELLERS">Bạn đang kinh doanh với Amazon như nào?</label>
+                        <div>
+                          <div class="entry__choice">
+                            <label><input type="radio" name="PHAN_LOAI_AMAZON_SELLERS" class="input_replaced" value="1"><span class="radio-button"></span><span>Chưa từng kinh doanh với Amazon</span></label>
+                          </div>
+                          <div class="entry__choice">
+                            <label><input type="radio" name="PHAN_LOAI_AMAZON_SELLERS" class="input_replaced" value="2"><span class="radio-button"></span><span>Đang kinh doanh Amazon với doanh số &lt;=$10k/tháng</span></label>
+                          </div>
+                          <div class="entry__choice">
+                            <label><input type="radio" name="PHAN_LOAI_AMAZON_SELLERS" class="input_replaced" value="3"><span class="radio-button"></span><span>Đang kinh doanh Amazon với doanh số &gt;$10k/tháng</span></label>
+                          </div>
+                          <div class="entry__choice">
+                            <label><input type="radio" name="PHAN_LOAI_AMAZON_SELLERS" class="input_replaced" value="4"><span class="radio-button"></span><span>Đã từng kinh doanh Amazon nhưng giờ không còn nữa.</span></label>
+                          </div>
+                        </div>
+                      </div>
+                      <label class="entry__error entry__error--primary"></label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ═══ Ô GHI SỐ BÀI (NGUON_BAI) — ĐANG BẬT ═══════════════════
+                     Trong Brevo, trường này sinh ra ở dạng ô nhập chữ nhìn thấy
+                     được. Ở đây đổi thành type="hidden": khách không thấy, không
+                     điền, JS ở cuối trang tự đổ số bài từ ?bai=… vào.
+                     Đừng đổi lại thành type="text" — khách sẽ thấy một ô trống
+                     không có tên gọi và không biết điền gì. -->
+                <input type="hidden" id="NGUON_BAI" name="NGUON_BAI" value="" />
+
+                <!-- ═══ reCAPTCHA ═══
+                     Anh Bình đã bật captcha trong Brevo. Đã bật ở Brevo thì
+                     BẮT BUỘC phải có khối này, nếu không mọi lần gửi đều bị
+                     Brevo từ chối. Cần cả dòng script recaptcha ở cuối trang. -->
+                <div>
+                  <div class="sib-captcha sib-form-block">
+                    <div class="form__entry entry_block">
+                      <div class="form__label-row">
+                        <div class="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LdTwYotAAAAAPAlu-Cu6D4wuF6nkhYSEQAcfoS8" data-callback="handleCaptchaResponse"></div>
+                      </div>
+                      <label class="entry__error entry__error--primary"></label>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="sib-form-block">
+                    <button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
+                      <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" /></svg>
+                      ĐĂNG KÝ CHỜ THÔNG TIN SÁCH
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Bẫy chống bot của Brevo — người thật không nhìn thấy. Đừng xoá. -->
+                <input type="text" name="email_address_check" value="" class="input--hidden">
+                <input type="hidden" name="locale" value="en">
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dòng cam kết dưới form. Yêu cầu: 1 câu ngắn về việc không spam /
+             không chia sẻ email. Giữ nguyên link chính sách bảo mật. -->
+        <p class="form-note">
+          <span class="ph">[[CÂU CAM KẾT KHÔNG SPAM]]</span>
+          Xem <a href="privacy.html">Chính sách bảo mật</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 6. FOOTER TỐI GIẢN ═══ -->
+  <footer class="foot">
+    <div class="wrap">
+      <p>© 2026 ECom GreenWay. Bảo lưu mọi quyền.</p>
+      <p><a href="privacy.html">Chính sách bảo mật</a></p>
+    </div>
+  </footer>
+
+  <!-- ═══ CẤU HÌNH THÔNG BÁO CỦA FORM BREVO ═══
+       Nguyên văn từ mã Brevo, chỉ bỏ các dòng cho trường điện thoại/ngày tháng
+       vì form này không có hai loại đó. -->
+  <script>
+    // Hàm này reCAPTCHA gọi khi khách tick "Tôi không phải người máy".
+    // Phải khai báo TRƯỚC khi tải script reCAPTCHA bên dưới.
+    function handleCaptchaResponse() {
+      var event = new Event('captchaChange');
+      document.getElementById('sib-captcha').dispatchEvent(event);
+    }
+
+    window.LOCALE = 'en';
+    window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Thông tin không hợp lệ. Vui lòng kiểm tra lại định dạng và thử lại.";
+    window.REQUIRED_ERROR_MESSAGE = "Vui lòng không bỏ trống trường này. ";
+    window.GENERIC_INVALID_MESSAGE = "Thông tin không hợp lệ. Vui lòng kiểm tra lại định dạng và thử lại.";
+    window.REQUIRED_MULTISELECT_MESSAGE = 'Vui lòng chọn ít nhất 1 lựa chọn';
+    window.translation = {
+      common: {
+        selectedList: '{quantity} list selected',
+        selectedLists: '{quantity} lists selected',
+        selectedOption: '{quantity} selected',
+        selectedOptions: '{quantity} selected',
+      }
+    };
+    var AUTOHIDE = Boolean(0);
+  </script>
+
+  <!-- Script của Brevo: xử lý gửi form ngay tại trang (không nhảy sang web
+       Brevo), kiểm tra email, bật thông báo thành công/thất bại.
+       Bỏ dòng này thì form vẫn gửi được nhưng người dùng bị chuyển sang
+       trang của Brevo — mất người đọc. -->
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+  <!-- reCAPTCHA của Google. Mã Brevo cấp để ?hl=en (captcha tiếng Anh);
+       đổi thành hl=vi cho khớp trang tiếng Việt. -->
+  <script src="https://www.google.com/recaptcha/api.js?hl=vi"></script>
+
+  <script>
+    // ─── ĐỌC ?bai=<số> TỪ URL, ĐỔ VÀO Ô ẨN NGUON_BAI ───────────────────
+    //
+    // TRẠNG THÁI: ĐANG BẬT. Attribute NGUON_BAI đã tạo trong Brevo (29/08/2026).
+    // Mở /sach?bai=15 → ô ẩn NGUON_BAI nhận giá trị "15" → Brevo ghi lại lead
+    // đó đến từ bài Facebook số 15.
+    //
+    // Không có ?bai= trên URL thì ô để rỗng và form vẫn gửi bình thường.
+    (function () {
+      var NGUON_BAI_FIELD = 'NGUON_BAI';
+
+      if (!NGUON_BAI_FIELD) return; // để rỗng = tắt tính năng, form vẫn gửi bình thường
+
+      var el = document.querySelector('[name="' + NGUON_BAI_FIELD + '"]');
+      if (!el) {
+        // Kêu to ở console thay vì im lặng: sai tên field = mất dấu nguồn lead.
+        console.warn('[/sach] Khong tim thay hidden field "' + NGUON_BAI_FIELD +
+                     '" trong form Brevo. Lead van gui duoc nhung KHONG ghi duoc so bai.');
+        return;
+      }
+
+      var bai = '';
+      try {
+        bai = new URLSearchParams(window.location.search).get('bai') || '';
+      } catch (e) { bai = ''; }
+
+      el.value = bai;               // không có ?bai= → để rỗng, không chặn submit
+    })();
+  </script>
+
+</body>
+</html>
