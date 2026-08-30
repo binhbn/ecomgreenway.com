@@ -10,8 +10,9 @@
     bằng CSS theo <html lang>. Nếu trang này dùng cơ chế đó, người dùng từng
     bấm EN ở trang chủ sẽ mở /sach ra thấy TRANG TRẮNG. Giữ nguyên như hiện tại.
   · Trang tự chứa 100%: không phụ thuộc CSS/JS của index.html.
-  · Chữ trong [[ NGOẶC VUÔNG KÉP ]] là placeholder — thay bằng chữ thật,
-    và xoá luôn <span class="ph">…</span> bọc quanh nó.
+  · Bản v1 rút gọn: hero -> khối uy tín -> form -> footer. Phần mô tả sách
+    và vài câu phụ chưa có, chỗ dành cho chúng được đánh dấu bằng comment
+    "CHỖ DÀNH CHO ..." ngay tại vị trí sẽ điền.
   ══════════════════════════════════════════════════════════════════════════
 -->
 <html lang="vi">
@@ -20,17 +21,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Tiêu đề tab trình duyệt + tiêu đề hiện khi dán link lên Facebook.
-       Yêu cầu: ≤ 60 ký tự, giữ đuôi "— ECom GreenWay" để nhận diện. -->
-  <title>[[TIÊU ĐỀ TRANG]] — ECom GreenWay</title>
+       Nên ≤ 60 ký tự và giữ đuôi "— ECom GreenWay" để nhận diện. -->
+  <title>Đăng ký danh sách chờ nhận sách — ECom GreenWay</title>
 
   <!-- Đoạn mô tả hiện dưới tiêu đề khi dán link lên Facebook.
-       Yêu cầu: 1–2 câu, 120–155 ký tự, nói lợi ích của việc đăng ký. -->
-  <meta name="description" content="[[MÔ TẢ NGẮN CHO FACEBOOK / GOOGLE]]" />
+       Ghép từ chữ đã có sẵn (tiêu đề form Brevo + dòng uy tín trên trang chủ),
+       không phải câu viết mới. Sửa được — giữ trong khoảng 120–155 ký tự. -->
+  <meta name="description" content="Đăng ký danh sách chờ nhận sách từ Bùi Ngọc Bình — Founder ECom GreenWay, nhà cung cấp dịch vụ đào tạo được Amazon Global Selling Vietnam liệt kê." />
 
   <link rel="icon" type="image/jpeg" href="assets/ECom GreenWay favicon.jpeg" />
 
   <!-- ⚠️ XOÁ DÒNG NÀY TRƯỚC KHI CHẠY THẬT ⚠️
-       Đang chặn Google lập chỉ mục vì trang còn chữ placeholder [[ ]].
+       Đang chặn Google lập chỉ mục vì trang mới ở bản v1 rút gọn,
+       phần mô tả sách chưa có.
        Điền xong hết chữ thì xoá dòng dưới, nếu không trang sẽ mãi không
        xuất hiện trên Google. -->
   <meta name="robots" content="noindex" />
@@ -41,8 +44,8 @@
        powershell -File tools\render-og.ps1 — đừng sửa file .png trực tiếp. -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.ecomgreenway.com/sach" />
-  <meta property="og:title" content="[[TIÊU ĐỀ TRANG]] — ECom GreenWay" />
-  <meta property="og:description" content="[[MÔ TẢ NGẮN CHO FACEBOOK / GOOGLE]]" />
+  <meta property="og:title" content="Đăng ký danh sách chờ nhận sách — ECom GreenWay" />
+  <meta property="og:description" content="Đăng ký danh sách chờ nhận sách từ Bùi Ngọc Bình — Founder ECom GreenWay, nhà cung cấp dịch vụ đào tạo được Amazon Global Selling Vietnam liệt kê." />
   <meta property="og:image" content="https://www.ecomgreenway.com/assets/og-sach.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -100,13 +103,6 @@
 
     .text-gold { color: var(--gold); font-family: var(--font-data); font-weight: 600; }
 
-    /* Đánh dấu chỗ cần điền chữ — xoá thẻ này khi đã điền xong */
-    .ph {
-      background: #FFF6DE; border: 1px dashed var(--gold); border-radius: 5px;
-      padding: 1px 7px; color: #7a5b16;
-      font-family: var(--font-head); font-weight: 600;
-    }
-
     /* ─── HEADER RÚT GỌN ────────────────────────────────────────── */
     /* Cố ý KHÔNG copy nav trang chủ: chỉ 1 đường về, không menu, không CTA phụ */
     .topbar { border-bottom: 1px solid var(--border); background: var(--white); padding: 12px 0; }
@@ -116,7 +112,7 @@
     .home-link:hover { color: var(--green); }
 
     /* ─── HERO / TIÊU ĐỀ TRANG ──────────────────────────────────── */
-    .hero { background: var(--green-dark); color: var(--white); padding: 44px 0 40px; }
+    .hero { background: var(--green-dark); color: var(--white); padding: 36px 0 34px; }
     .eyebrow { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--green-light); margin-bottom: 14px; }
     .hero h1 { font-size: clamp(26px, 6.4vw, 40px); color: var(--white); }
     .hero h1 em { font-style: normal; color: var(--gold); }
@@ -127,7 +123,7 @@
     .intro p:last-child { margin-bottom: 0; }
 
     /* ─── AUTHORITY ─────────────────────────────────────────────── */
-    .authority { padding: 32px 0 40px; }
+    .authority { padding: 28px 0 32px; }
     .auth-card { background: var(--green-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; }
     .auth-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
     .auth-head img { width: 62px; height: 62px; border-radius: 50%; object-fit: cover; flex-shrink: 0; box-shadow: var(--shadow); }
@@ -215,17 +211,30 @@
 
     /* Nhóm radio */
     #sib-form .entry_mcq .entry__label { margin-bottom: 12px !important; }
-    #sib-form .entry__choice { margin-bottom: 11px !important; }
-    #sib-form .entry__choice label { display: flex !important; align-items: flex-start !important; gap: 10px !important; cursor: pointer; }
+    /* THỦ PHẠM làm mất ký tự đầu ("hưa từng" thay vì "Chưa từng"):
+       Brevo đặt  .sib-form .entry__choice { padding-left:1.5em; text-indent:-1.5em }
+       — kiểu thụt lề treo, kéo RIÊNG DÒNG ĐẦU lùi ngược 24px, đúng chỗ nút
+       tròn đang đứng. Phải huỷ cả hai, rồi tự chừa chỗ bằng padding trên label. */
+    #sib-form .entry__choice {
+      padding-left: 0 !important; text-indent: 0 !important;
+      margin-bottom: 12px !important;
+    }
+    /* Nút tròn đặt tuyệt đối ở lề trái, chữ chừa sẵn 30px bên trái.
+       Chừa chỗ bằng padding thì không thể đè nhau. */
+    #sib-form .entry__choice label {
+      display: block !important; position: relative !important;
+      padding-left: 30px !important; cursor: pointer;
+    }
     #sib-form .entry__choice span:not(.radio-button) {
+      display: block !important;
       font-size: 15px !important; line-height: 1.5 !important;
       color: var(--gray-dark) !important;
     }
     /* Nút radio: Brevo mặc định xanh dương #0092ff → đổi sang xanh EGW */
     .sib-form .radio-button {
+      position: absolute !important; left: 0 !important; top: 3px !important;
       width: 18px !important; height: 18px !important;
-      flex-shrink: 0 !important; margin: 2px 0 0 !important;
-      border-color: #B7C4CC !important;
+      margin: 0 !important; border-color: #B7C4CC !important;
     }
     .sib-form .input_replaced:checked + .radio-button { border-color: var(--green) !important; }
     .sib-form .input_replaced:checked + .radio-button:before { background: var(--green) !important; }
@@ -279,10 +288,10 @@
       .topbar { padding: 14px 0; }
       .topbar img { height: 46px; }
       .home-link { font-size: 14px; }
-      .hero { padding: 60px 0 54px; }
+      .hero { padding: 54px 0 48px; }
       .intro { padding: 52px 0 8px; }
       .intro p { font-size: 17px; }
-      .authority { padding: 36px 0 48px; }
+      .authority { padding: 34px 0 40px; }
       .auth-card { padding: 32px 34px; }
       .auth-head img { width: 74px; height: 74px; }
       .auth-name { font-size: 20px; }
@@ -307,36 +316,36 @@
   <!-- ═══ 2. TIÊU ĐỀ TRANG ═══ -->
   <section class="hero">
     <div class="wrap">
-      <!-- Dòng dẫn phía trên tiêu đề.
-           Yêu cầu: ≤ 8 từ, nói ĐÂY LÀ CÁI GÌ (vd: một cuốn sách sắp ra mắt),
+      <!-- CHỖ DÀNH CHO DÒNG DẪN phía trên tiêu đề (bản v1 chưa dùng).
+           Khi cần, thêm lại vào đây:
+             <p class="eyebrow">CHỮ IN HOA, ≤ 8 TỪ</p>
+           Yêu cầu: nói ĐÂY LÀ CÁI GÌ (vd: một cuốn sách sắp ra mắt),
            không phải lời quảng cáo. -->
-      <p class="eyebrow"><span class="ph">[[DÒNG DẪN]]</span></p>
 
-      <!-- Tiêu đề trang.
-           Yêu cầu: 1 câu, KHÔNG quá 12 từ. Nói VẤN ĐỀ CỦA NGƯỜI ĐỌC,
-           không nói tên sách. Muốn nhấn 1 cụm bằng màu gold thì bọc <em>…</em>
-           quanh cụm đó (vd: "<em>Cụm nhấn</em> — phần còn lại của câu."). -->
-      <h1><span class="ph">[[TIÊU ĐỀ]]</span></h1>
+      <!-- Tiêu đề trang. Muốn nhấn 1 cụm bằng màu gold thì bọc <em>…</em>
+           quanh cụm đó (vd: "<em>Cụm nhấn</em> — phần còn lại của câu"). -->
+      <h1>Đăng ký danh sách chờ nhận sách từ Bùi Ngọc Bình</h1>
     </div>
   </section>
 
-  <!-- ═══ 3. MÔ TẢ NGẮN: SÁCH NÓI VỀ VẤN ĐỀ GÌ ═══ -->
-  <section class="intro">
-    <div class="wrap">
-      <!-- Đoạn 1. Yêu cầu: 2–3 câu, ≤ 60 từ. Gọi tên vấn đề người đọc đang gặp,
-           bằng chính ngôn ngữ họ hay dùng. Chưa nói về sách. -->
-      <p><span class="ph">[[ĐOẠN 1 — VẤN ĐỀ NGƯỜI ĐỌC ĐANG GẶP]]</span></p>
+  <!-- ═══ CHỖ DÀNH CHO PHẦN MÔ TẢ SÁCH — BẢN v1 CHƯA CÓ ═══════════════════
+       Anh Bình sẽ bổ sung nội dung vào đúng vị trí này (giữa tiêu đề và khối
+       uy tín). Khi có nội dung, mở lại khối bên dưới bằng cách bỏ hai dòng
+       dấu chú thích bao quanh nó:
 
-      <!-- Đoạn 2. Yêu cầu: 2–3 câu, ≤ 60 từ. Sách giải quyết vấn đề đó theo
-           hướng nào. KHÔNG hứa kết quả bằng con số. KHÔNG dùng "bí quyết",
-           "giàu nhanh" — trái định vị thương hiệu. -->
-      <p><span class="ph">[[ĐOẠN 2 — SÁCH GIẢI QUYẾT VẤN ĐỀ ĐÓ THẾ NÀO]]</span></p>
+       <section class="intro">
+         <div class="wrap">
+           Đoạn 1 — vấn đề người đọc đang gặp.
+             2–3 câu, ≤ 60 từ, dùng đúng ngôn ngữ họ hay nói. Chưa nói về sách.
+           Đoạn 2 — sách giải quyết vấn đề đó theo hướng nào.
+             2–3 câu, ≤ 60 từ. KHÔNG hứa kết quả bằng con số. KHÔNG dùng
+             "bí quyết" hay "giàu nhanh" — trái định vị thương hiệu.
+           Đoạn 3 — sách này viết cho ai, và không viết cho ai. 1 câu.
+         </div>
+       </section>
 
-      <!-- Đoạn 3 (tuỳ chọn — không cần thì xoá cả thẻ <p> này).
-           Yêu cầu: 1 câu. Sách viết cho ai, và không viết cho ai. -->
-      <p><span class="ph">[[ĐOẠN 3 — SÁCH NÀY VIẾT CHO AI]]</span></p>
-    </div>
-  </section>
+       CSS của khối .intro vẫn còn nguyên trong thẻ <style>, không cần viết lại.
+       ══════════════════════════════════════════════════════════════════════ -->
 
   <!-- ═══ 4. AUTHORITY ═══ -->
   <!-- Nội dung khối này LẤY NGUYÊN VĂN từ index.html (mục COACH / WHY EGW).
@@ -368,14 +377,15 @@
   <section class="signup" id="dang-ky">
     <div class="wrap">
       <div class="form-card">
-        <!-- Tiêu đề khối form. Chữ này LẤY TỪ chính form Brevo của anh
-             (khối tiêu đề 32px), không phải tôi viết mới. Sửa thoải mái —
-             nhưng sửa ở ĐÂY, không sửa trong Brevo, vì khối tiêu đề gốc của
-             Brevo đã được gỡ khỏi form (xem ghi chú ở đầu <form> bên dưới). -->
-        <h2>Đăng ký danh sách chờ nhận sách từ Bùi Ngọc Bình</h2>
-
-        <!-- Câu dưới tiêu đề — cũng lấy từ form Brevo của anh. -->
-        <p class="sub">Ưu đãi đặc biệt cho 100 người đầu tiên đăng ký nhận sách từ Bình.</p>
+        <!-- CHỖ DÀNH CHO TIÊU ĐỀ KHỐI FORM — bản v1 bỏ trống có chủ ý.
+             Tiêu đề gốc của Brevo ("Đăng ký danh sách chờ nhận sách từ Bùi
+             Ngọc Bình") đã lên làm <h1> ở đầu trang, để đây nữa là lặp hai
+             lần trên cùng một màn hình. Câu "Ưu đãi đặc biệt cho 100 người
+             đầu tiên…" cũng đã gỡ theo yêu cầu.
+             Muốn thêm lại thì đặt vào đây:
+               <h2>Tiêu đề khối form</h2>
+               <p class="sub">Câu mô tả ngắn</p>
+             CSS cho .form-card h2 và .sub vẫn còn nguyên trong <style>. -->
 
         <!-- ════════════════════════════════════════════════════════════
              FORM BREVO (embed native, KHÔNG iframe).
@@ -504,10 +514,9 @@
           </div>
         </div>
 
-        <!-- Dòng cam kết dưới form. Yêu cầu: 1 câu ngắn về việc không spam /
-             không chia sẻ email. Giữ nguyên link chính sách bảo mật. -->
+        <!-- Câu cam kết không spam sẽ thêm vào ngay trước link bên dưới
+             (1 câu ngắn, về việc không spam / không chia sẻ email). -->
         <p class="form-note">
-          <span class="ph">[[CÂU CAM KẾT KHÔNG SPAM]]</span>
           Xem <a href="privacy.html">Chính sách bảo mật</a>.
         </p>
       </div>

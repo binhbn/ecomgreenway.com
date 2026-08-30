@@ -5,7 +5,7 @@
   Đây KHÔNG phải trang web, chỉ là bản vẽ để chụp ra file ảnh PNG.
 
   CÁCH DÙNG:
-    1. Sửa 2 chỗ [[ ]] bên dưới (tiêu đề + dòng dẫn)
+    1. Sửa tiêu đề <h1> bên dưới (và dòng dẫn nếu muốn dùng)
     2. Chạy:  powershell -File tools\render-og.ps1
     3. Ảnh ra ở assets/og-sach.png, tự động đúng 1200×630
 
@@ -102,15 +102,14 @@
         <img src="../assets/Ecom Greenway Logo.png" alt="ECom GreenWay" />
       </div>
 
-      <!-- DÒNG DẪN. Yêu cầu: ≤ 5 từ, IN HOA, nói đây là cái gì.
-           Nên trùng ý với dòng dẫn trên trang /sach. -->
-      <div class="eyebrow">[[DÒNG DẪN]]</div>
+      <!-- CHỖ DÀNH CHO DÒNG DẪN — bản v1 bỏ trống, khớp với trang /sach.
+           Muốn thêm: <div class="eyebrow">CHỮ IN HOA, ≤ 5 TỪ</div> -->
 
       <!-- TIÊU ĐỀ. Yêu cầu: ≤ 12 từ, tối đa 3 dòng khi hiện ra.
            Nên dùng ĐÚNG câu tiêu đề đã đặt trên trang /sach — người đọc thấy
            ảnh rồi bấm vào, thấy lại đúng câu đó thì mới thấy nhất quán.
            Bọc <em>…</em> quanh cụm muốn tô vàng (chỉ 1 cụm, đừng tô cả câu). -->
-      <h1>[[TIÊU ĐỀ]]</h1>
+      <h1>Đăng ký danh sách chờ <em>nhận sách</em> từ Bùi Ngọc Bình</h1>
 
       <div class="url">ecomgreenway.com<span>/sach</span></div>
     </div>

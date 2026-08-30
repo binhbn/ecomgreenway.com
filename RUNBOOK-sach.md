@@ -5,37 +5,38 @@ Sửa file → commit → push lên `main` → khoảng 1–2 phút sau là live
 
 ---
 
-## 0. TRƯỚC KHI CHẠY THẬT — việc bắt buộc
+## 0. Trang đang ở bản v1 rút gọn
 
-Trang đang có dòng `<meta name="robots" content="noindex" />` trong phần `<head>`,
-chặn Google lập chỉ mục vì nội dung còn là chữ mẫu.
+Cấu trúc hiện tại, từ trên xuống: header → tiêu đề → khối uy tín → form → footer.
+Phần mô tả sách **chưa có**, đây là quyết định có chủ ý để deploy sớm.
 
-**Điền xong hết chữ thì phải xoá dòng đó**, nếu không trang sẽ mãi không lên Google.
-Dòng này có ghi chú cảnh báo ngay phía trên, không thể nhầm.
+Trang có dòng `<meta name="robots" content="noindex" />` trong `<head>`, chặn Google
+lập chỉ mục. **Bổ sung xong phần mô tả sách thì xoá dòng đó** — nếu không trang sẽ mãi
+không lên Google. Dòng này có ghi chú cảnh báo ngay phía trên, không thể nhầm.
 
 Việc này không ảnh hưởng traffic từ Facebook — link dán dưới bài vẫn chạy bình thường
 kể cả khi còn `noindex`.
 
 ---
 
-## 1. Sửa chữ trên trang
+## 1. Bổ sung chữ vào trang
 
-Mở `sach.html`. Mọi chỗ cần điền đều bọc trong `[[ ]]` và hiện **nền vàng viền đứt**
-trên trình duyệt, không thể bỏ sót. Ngay phía trên mỗi chỗ có dòng ghi chú nói rõ
-yêu cầu (bao nhiêu từ, nói gì, tránh gì).
+Mở `sach.html` và tìm các comment bắt đầu bằng **`CHỖ DÀNH CHO`** — mỗi comment nằm
+đúng vị trí sẽ điền, kèm sẵn đoạn mã mẫu và yêu cầu (bao nhiêu từ, nói gì, tránh gì).
 
-Cách sửa — ví dụ tiêu đề:
+Có 4 chỗ đang để trống:
 
-```
-TRƯỚC:  <h1><span class="ph">[[TIÊU ĐỀ]]</span></h1>
-SAU:    <h1>Doanh số tăng đều mà cuối tháng vẫn không thấy lãi</h1>
-```
+| Chỗ | Nằm ở đâu | Nội dung cần |
+|---|---|---|
+| Dòng dẫn trên tiêu đề | trong khối `hero` | ≤ 8 từ, in hoa, nói đây là cái gì |
+| Mô tả sách (3 đoạn) | giữa tiêu đề và khối uy tín | vấn đề người đọc gặp → sách giải quyết ra sao → viết cho ai |
+| Tiêu đề khối form | trong `form-card` | ≤ 10 từ, nói người đọc nhận được gì |
+| Câu cam kết không spam | ngay trước link Chính sách bảo mật | 1 câu ngắn |
 
-Xoá cả cặp `<span class="ph">` … `</span>`, không chỉ xoá chữ bên trong.
+CSS cho các khối này **vẫn còn nguyên** trong thẻ `<style>`, không cần viết lại — chỉ
+cần bỏ dấu chú thích quanh đoạn mã mẫu và thay chữ.
 
-Còn 6 chỗ chưa điền trong thân trang: tiêu đề, dòng dẫn, 3 đoạn mô tả sách, câu cam kết
-không spam. Thêm 2 chỗ trong phần `<head>`: `<title>` và `og:title` / `og:description` —
-đây là chữ Facebook hiện ra khi dán link, đừng quên.
+Sửa tiêu đề chính thì nhớ sửa cả `<title>`, `og:title` và ảnh bìa (mục 2) cho khớp nhau.
 
 **Không sửa** khối authority (phần giới thiệu anh Bình) một mình — nội dung đó lấy nguyên
 văn từ trang chủ. Sửa ở đây mà không sửa `index.html` là hai trang nói vênh nhau.
@@ -49,7 +50,7 @@ xuống dưới bài viết. Nó **không phải file ảnh sửa tay**, mà đ�
 
 Muốn đổi chữ trên ảnh:
 
-1. Mở `tools/og-sach.html`, sửa 2 chỗ `[[DÒNG DẪN]]` và `[[TIÊU ĐỀ]]`
+1. Mở `tools/og-sach.html`, sửa dòng `<h1>` (và thêm dòng dẫn nếu muốn)
 2. Chạy: `powershell -File tools\render-og.ps1`
 3. Ảnh `assets/og-sach.png` tự cập nhật, đúng 1200×630
 
@@ -77,7 +78,8 @@ Ba chỗ trên trang **cố ý khác với mã Brevo**, đừng "sửa lại cho
 
 | Chỗ | Brevo sinh ra | Trên trang | Vì sao |
 |---|---|---|---|
-| Tiêu đề + câu "Ưu đãi 100 người đầu tiên" | nằm trong form | đưa ra ngoài form | để dùng đúng font EGW. Sửa 2 câu này trong `sach.html`, **sửa trong Brevo sẽ không có tác dụng** |
+| Tiêu đề + câu "Ưu đãi 100 người đầu tiên" | nằm trong form | **đã gỡ hẳn** | tiêu đề đã lên làm `<h1>` đầu trang, để trong form nữa là lặp hai lần trên một màn hình |
+| Thụt lề nhóm lựa chọn | `padding-left:1.5em; text-indent:-1.5em` | huỷ cả hai | `text-indent` âm kéo riêng dòng đầu lùi ngược, đè lên nút tròn và ăn mất ký tự đầu ("hưa từng" thay vì "Chưa từng") |
 | `NGUON_BAI` | ô nhập chữ nhìn thấy được | `type="hidden"` | khách không cần điền, JS tự đổ số bài vào |
 | reCAPTCHA | `?hl=en` | `?hl=vi` | captcha tiếng Việt cho khớp trang |
 
@@ -131,3 +133,5 @@ buộc trong `<head>`: dòng `sib-styles.css` phải nằm **TRƯỚC** thẻ `<
 - **Ô nhập để cỡ chữ 16px.** Nhỏ hơn thì iPhone tự phóng to trang khi khách bấm vào ô.
 - **Captcha bị thu nhỏ trên màn hình hẹp.** Ô captcha của Google rộng cố định 304px, để
   nguyên thì tràn ra ngoài màn 375px và kéo cả trang trượt ngang.
+- **Nhóm lựa chọn bị huỷ thụt lề của Brevo.** Xem bảng ở mục 3 — bỏ phần huỷ đó là ký tự
+  đầu mỗi dòng bị nút tròn che mất.
