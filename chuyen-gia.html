@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<!-- /chuyen-gia: dựng tự động từ coaching-repo bằng tools/build-chuyen-gia.py. ĐỪNG SỬA TAY. -->
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpeg" href="assets/ECom GreenWay favicon.jpeg">
+<title>Đồng hành chuyên gia 1:1 · ECom GreenWay</title>
+<meta name="description" content="Đồng hành 1:1 sáu tháng cho chuyên gia đã có nghề và khách giới thiệu, muốn khách trả phí đều và xây business của mình. Đặt lịch trò chuyện 60 phút với Bùi Ngọc Bình.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ecomgreenway.com/chuyen-gia">
+<meta property="og:title" content="Đồng hành chuyên gia 1:1 · ECom GreenWay">
+<meta property="og:description" content="Đồng hành 1:1 sáu tháng cho chuyên gia đã có nghề và khách giới thiệu, muốn khách trả phí đều và xây business của mình. Đặt lịch trò chuyện 60 phút với Bùi Ngọc Bình.">
+<meta property="og:image" content="https://www.ecomgreenway.com/assets/og-chuyen-gia.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="vi_VN">
+<meta name="brand" content="egw">
+<meta name="audience" content="team">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: sidebar panel EGW (tab + Xem một trang), bố cục từng panel kế thừa proposal VIFADIMED v10 */
+:root{
+  --green-100:#EEF5E8;--green-200:#D9EACA;--green-300:#A8D08D;--green-600:#4C8C2B;--green-700:#3D7222;--green-800:#2E5E1A;--green-900:#1F4210;
+  --gold-100:#F7F0E1;--gold-500:#C9A24D;--gold-700:#8A6E32;--gold-800:#7A5F24;
+  --white:#FFFFFF;--gray-light:#F5F5F5;--border:#DDE8D4;--gray:#6B6B6B;--text:#2B2B2B;
+  --bg-alt:#F5F5F5;--surface:#FFFFFF;--surface-tint:#EEF5E8;
+  --text-muted:#6B6B6B;--accent:#4C8C2B;--accent-text:#3D7222;--gold-text:#8A6E32;
+  --bg-dark:#2E5E1A;--text-on-dark:#FFFFFF;--text-muted-on-dark:rgba(255,255,255,.78);--label-on-dark:#AFD596;--gold-on-dark:#C9A24D;
+  --surface-on-dark:rgba(255,255,255,.06);--border-on-dark:rgba(255,255,255,.12);
+  --font-head:'Montserrat',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif;--font-data:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{color-scheme:light;scroll-behavior:smooth}
+body{margin:0;background:var(--bg-alt);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-text)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--font-head);color:var(--green-900);margin:0;line-height:1.25;text-wrap:balance}
+h2{font-size:22px;font-weight:700}
+h3{font-size:16px;font-weight:700}
+p{margin:0}
+ul{margin:0}
+.num{font-family:var(--font-data);font-variant-numeric:tabular-nums;font-weight:600}
+.muted{color:var(--text-muted)}
+.eyebrow{font-family:var(--font-head);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-800)}
+
+/* ===== shell ===== */
+.shell{display:flex;min-height:100vh}
+.sidebar{flex:0 0 250px;background:var(--bg-dark);color:var(--text-muted-on-dark);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{padding:20px 18px 16px;border-bottom:1px solid var(--border-on-dark)}
+.brand img{height:56px;width:auto;display:block;margin-bottom:12px}
+.brand .eyebrow{color:var(--label-on-dark)}
+.brand .title{font-family:var(--font-head);font-weight:800;font-size:18px;color:var(--text-on-dark);margin-top:4px;line-height:1.25}
+.brand .sub{font-family:var(--font-data);font-size:12px;color:var(--text-muted-on-dark);margin-top:6px}
+nav.navlist{padding:12px 10px;flex:1}
+.group-label{font-family:var(--font-head);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--label-on-dark);padding:10px 10px 6px}
+.navitem{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:8px;cursor:pointer;color:var(--text-muted-on-dark);font-size:16px;font-weight:500;margin-bottom:2px;border:1px solid transparent;text-decoration:none;line-height:1.3}
+.navitem:hover{background:var(--surface-on-dark);color:var(--text-on-dark)}
+.navitem.active{background:var(--green-600);color:var(--text-on-dark);font-weight:600}
+.navitem .hex{width:26px;height:26px;flex:0 0 26px;display:flex;align-items:center;justify-content:center;border-radius:7px;background:rgba(255,255,255,.10);font-family:var(--font-data);font-size:12px;font-weight:600}
+.navitem.active .hex{background:rgba(255,255,255,.22)}
+.navnum{margin-left:auto;font-family:var(--font-data);font-size:12px;padding:1px 7px;border-radius:20px;background:rgba(255,255,255,.08);color:var(--label-on-dark)}
+.navitem.gold .navnum{background:var(--gold-on-dark);color:var(--green-900);font-weight:600}
+.sidebar-foot{padding:14px 18px 18px;border-top:1px solid var(--border-on-dark);font-size:12px;line-height:1.7}
+.sidebar-foot .row{display:flex;justify-content:space-between;gap:12px}
+.sidebar-foot .row span:last-child{font-family:var(--font-data);font-size:12px;color:var(--label-on-dark);text-align:right}
+.btn-all{margin-top:12px;width:100%;border:1px solid var(--border-on-dark);background:transparent;color:var(--text-on-dark);font-family:var(--font-head);font-weight:700;font-size:14px;padding:8px 12px;border-radius:8px;cursor:pointer}
+.btn-all:hover{opacity:.88}
+.cta-side{display:block;margin:0 0 10px;background:var(--gold-on-dark);color:var(--green-900);font-family:var(--font-head);font-weight:700;font-size:14px;text-align:center;padding:10px 12px;border-radius:8px;text-decoration:none}
+.cta-side:hover{opacity:.9}
+.soft-cta{margin-top:12px;font-size:14px;color:var(--text)}
+.soft-cta a{font-weight:600}
+.cta-btn{display:inline-block;margin-top:16px;background:var(--green-900);color:var(--white);font-family:var(--font-head);font-weight:700;font-size:16px;line-height:1.3;padding:14px 22px;border-radius:12px;text-decoration:none}
+.cta-btn:hover{opacity:.9}
+.shell.all .btn-all{background:var(--gold-on-dark);color:var(--green-900);border-color:transparent}
+
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.topbar .crumb{font-family:var(--font-head);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
+.topbar h1{font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--green-900);margin:0;line-height:1.3;max-width:56ch}
+.topbar-right{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-head);font-size:12px;font-weight:700;letter-spacing:.04em;padding:4px 11px;border-radius:100px;white-space:nowrap;background:var(--surface-tint);color:var(--green-800)}
+.pill.gold{background:var(--gold-100);color:var(--gold-800)}
+.pill.gray{background:var(--gray-light);color:var(--text-muted)}
+.content{padding:24px 28px 56px;max-width:1080px;width:100%}
+.panel{display:none}
+.panel.active{display:block}
+.shell.all .panel{display:block}
+.panel-title{display:none;margin:36px 0 12px;padding-top:24px;border-top:2px solid var(--border)}
+.shell.all .panel-title{display:block}
+.shell.all .panel:first-of-type .panel-title{margin-top:0;padding-top:0;border-top:0}
+.lede{font-size:18px;line-height:1.7;color:var(--text);max-width:72ch;margin:0 0 18px}
+.lede b{color:var(--green-900)}
+
+/* bìa (kế thừa slide bìa v10) */
+.cover{background:var(--bg-dark);border-radius:12px;padding:28px 28px 26px;margin:0 0 22px;color:var(--text-on-dark);display:grid;gap:10px;border-left:5px solid var(--gold-500)}
+.cover .eyebrow{color:var(--label-on-dark)}
+.cover h2{color:var(--text-on-dark);font-size:30px;font-weight:800;line-height:1.2}
+.cover p{color:var(--text-muted-on-dark);font-size:16px}
+.cover .meta{font-family:var(--font-data);font-size:14px;color:var(--text-on-dark)}
+
+/* hợp đồng đọc */
+.contract{background:var(--surface-tint);border-radius:12px;padding:14px 18px;font-size:14px;color:var(--green-800);line-height:1.6;margin:0 0 18px}
+.cline{display:grid;grid-template-columns:168px 1fr;gap:4px 16px}
+.cline+.cline{margin-top:8px;padding-top:8px;border-top:1px solid var(--green-200)}
+.cline>span:first-child{font-family:var(--font-head);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-700);padding-top:2px}
+.cline b{color:var(--green-900)}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+.sec{margin:26px 0 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--surface-tint);flex-wrap:wrap}
+.sec-head h2{font-size:18px}
+.callout{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold-500);border-radius:0 12px 12px 0;padding:14px 18px;font-size:16px;color:var(--green-900);line-height:1.6;margin:18px 0 0}
+.callout b{color:var(--green-900)}
+
+/* tab 1: nền đang có + ba chỗ kẹt (kế thừa slide 02 v10) */
+.situ{display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;align-items:start}
+.have{background:var(--gray-light);border-radius:12px;padding:16px 18px}
+.have ul{padding-left:18px;font-size:14px;display:grid;gap:6px;margin-top:8px}
+.pains{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pain{background:var(--surface);border:1px solid var(--border);border-top:4px solid var(--green-800);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.pain .k{font-family:var(--font-head);font-weight:800;font-size:16px;color:var(--green-900)}
+.pain p{font-size:14px;color:var(--text)}
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fit .card{display:grid;gap:6px;font-size:14px}
+.fit .card.yes{border-left:5px solid var(--green-600)}
+.fit .card.no{background:var(--gray-light)}
+
+/* tab 2: ba kết quả (kế thừa slide 03 v10) */
+.goal{background:var(--surface-tint);border:1px solid var(--green-200);border-left:5px solid var(--green-600);border-radius:0 12px 12px 0;padding:14px 18px;font-size:16px;margin:0 0 16px}
+.goal b{color:var(--green-900)}
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.r{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.r-top{display:flex;gap:12px;align-items:center}
+.r-top .n{width:36px;height:36px;flex:0 0 36px;border-radius:50%;background:var(--green-800);color:var(--text-on-dark);font-family:var(--font-data);font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center}
+.r-top h3{font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
+.r .from{font-size:14px;color:var(--text-muted)}
+.r ul{padding-left:18px;font-size:14px;display:grid;gap:6px}
+.r .got{margin-top:auto;background:var(--surface-tint);border-radius:8px;padding:10px 12px;font-size:14px}
+.r .got b{display:block;font-family:var(--font-head);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-700);margin-bottom:2px}
+.band{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:var(--bg-dark);border-radius:12px;margin-top:14px;overflow:hidden}
+.band div{padding:12px 16px;font-size:14px;color:var(--text-muted-on-dark)}
+.band div+div{border-left:1px solid var(--border-on-dark)}
+.band b{display:block;font-family:var(--font-head);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-on-dark)}
+
+/* tab 3: bảng so sánh (kế thừa slide 04 v10) */
+.tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--white)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:14px;line-height:1.55}
+th,td{padding:12px 14px;vertical-align:top;text-align:left;border-bottom:1px solid var(--border)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--font-head);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-800);background:var(--gray-light)}
+th.ours{background:var(--green-800);color:var(--text-on-dark)}
+td.row{font-family:var(--font-head);font-weight:700;color:var(--green-900);width:140px}
+td.ours{background:var(--surface-tint);color:var(--green-900)}
+.swipe{display:none;font-family:var(--font-data);font-size:12px;color:var(--text-muted);margin-top:6px}
+.cross{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;border:1px dashed var(--border);border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14px;background:var(--white)}
+.cross b{font-family:var(--font-head);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-800)}
+
+/* tab 4: chặng (kế thừa slide 05 v10) */
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ph{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.ph-head{background:var(--green-800);color:var(--text-on-dark);padding:14px 16px;text-align:center}
+.ph-head b{display:block;font-family:var(--font-head);font-weight:800;font-size:16px;line-height:1.3;text-transform:uppercase}
+.ph-head span{display:block;font-family:var(--font-data);font-size:12px;color:var(--label-on-dark);margin-top:4px}
+.ph-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.ph .q{background:var(--surface-tint);border-radius:8px;padding:10px 12px;font-size:14px;font-style:italic;color:var(--green-900);text-align:center;font-weight:600}
+.ph .lbl{font-family:var(--font-head);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-700)}
+.ph ul{padding-left:18px;font-size:14px;display:grid;gap:5px}
+.ph .out{margin-top:auto;background:var(--green-800);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--text-on-dark)}
+.ph .out b{display:block;font-family:var(--font-head);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--label-on-dark);margin-bottom:2px}
+.rhythm{background:var(--gold-100);border-radius:12px;padding:12px 16px;margin-top:14px;font-size:14px;color:var(--gold-800)}
+.rhythm b{color:var(--gold-800)}
+
+/* tab 5: đồng hành & cam kết (kế thừa slide 06–07 v10) */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{padding:14px 16px;display:grid;gap:8px;align-content:start}
+.kpi-label{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--green-900);line-height:1.35}
+.fill{display:inline-block;justify-self:start;border:1.5px dashed var(--accent);border-radius:6px;padding:1px 9px;font-size:12px;color:var(--accent-text);background:var(--white)}
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lane{border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:14px;background:var(--white)}
+.lane>b{display:block;font-family:var(--font-head);font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--green-900);margin-bottom:6px}
+.lane ul{padding-left:18px;display:grid;gap:5px}
+.lane.me{border-color:var(--accent);border-width:1.5px}
+.bound{background:var(--gray-light);border-radius:12px;padding:14px 18px;font-size:14px;margin-top:12px}
+.bound b{font-family:var(--font-head);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-800);display:block;margin-bottom:4px}
+.promise{background:var(--bg-dark);border-radius:12px;padding:18px 22px;color:var(--text-on-dark);margin-top:22px;display:grid;gap:8px;border-left:5px solid var(--gold-500)}
+.promise .eyebrow{color:var(--gold-on-dark)}
+.promise p{font-size:16px;color:var(--text-muted-on-dark)}
+.promise p b{color:var(--text-on-dark)}
+.after{font-size:14px;color:var(--text-muted);margin-top:12px}
+
+/* tab 6: về mình & bước tiếp (kế thừa slide 08 + 07 v10) */
+.profile{display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px;align-items:stretch}
+.me-card{background:var(--bg-dark);border-radius:12px;padding:20px 18px;color:var(--text-on-dark);display:grid;gap:12px;align-content:start;justify-items:center;text-align:center}
+.me-card img{width:132px;height:132px;max-width:100%;border-radius:12px;object-fit:cover;display:block}
+.me-card .nm{font-family:var(--font-head);font-weight:800;font-size:18px}
+.me-card .rl{font-size:14px;color:var(--label-on-dark);margin-top:-8px}
+.stats{display:grid;gap:8px;width:100%;text-align:left}
+.stats div{font-size:14px;color:var(--text-muted-on-dark);line-height:1.4}
+.stats .num{color:var(--gold-on-dark);font-size:16px;margin-right:6px}
+.creds{display:grid;gap:10px;align-content:start}
+.cred{background:var(--surface);border:1px solid var(--border);border-left:5px solid var(--green-600);border-radius:0 12px 12px 0;padding:12px 16px;font-size:14px}
+.cred b{display:block;font-family:var(--font-head);font-size:16px;color:var(--green-900);margin-bottom:2px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start;font-size:14px}
+.step .n{font-family:var(--font-data);font-weight:600;font-size:14px;color:var(--gold-text)}
+.step b{font-family:var(--font-head);font-size:16px;color:var(--green-900)}
+.sign{font-family:var(--font-head);font-weight:700;color:var(--green-900);margin-top:14px}
+
+footer.src{font-family:var(--font-data);font-size:12px;color:var(--text-muted);padding:0 28px 28px;line-height:1.7;max-width:1080px}
+
+@media (prefers-reduced-motion:no-preference){.btn-all,.navitem{transition:background .15s ease,opacity .15s ease}}
+@media (max-width:900px){
+  .shell{flex-direction:column}
+  .sidebar{position:sticky;top:0;height:auto;flex:none;z-index:30;overflow:visible}
+  .brand{display:flex;align-items:center;gap:12px;padding:10px 14px}
+  .brand img{margin:0;height:36px}
+  .brand .eyebrow,.brand .sub{display:none}
+  .brand .title{font-size:14px;margin:0}
+  nav.navlist{display:flex;gap:6px;overflow-x:auto;padding:8px 10px;scrollbar-width:none;border-top:1px solid var(--border-on-dark)}
+  nav.navlist::-webkit-scrollbar{display:none}
+  .group-label{display:none}
+  .navitem{flex:0 0 auto;padding:8px 12px;font-size:14px;margin:0}
+  .navitem .hex{width:24px;height:24px;flex-basis:24px;font-size:12px}
+  .sidebar-foot{display:flex;gap:8px;padding:0 14px 8px;border-top:0}
+  .sidebar-foot .row{display:none}
+  .cta-side{flex:1;margin:0;padding:8px 10px}
+  .btn-all{flex:1;margin-top:0;width:auto}
+  .topbar{padding:12px 16px;position:static}
+  .topbar h1{font-size:18px}
+  .content{padding:18px 16px 48px}
+  footer.src{padding:0 16px 24px}
+  .situ,.profile{grid-template-columns:1fr}
+  .pains,.res,.phases,.steps{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .swipe{display:block}
+}
+@media (max-width:640px){
+  .fit,.lanes,.kpi-grid{grid-template-columns:1fr}
+  .band{grid-template-columns:1fr}
+  .band div+div{border-left:0;border-top:1px solid var(--border-on-dark)}
+  .cline{grid-template-columns:1fr;gap:2px}
+  .cover{padding:22px 18px}
+  .cover h2{font-size:22px}
+}
+@media print{
+  .sidebar,.btn-all{display:none!important}
+  .panel,.panel-title{display:block!important}
+  .topbar{position:static}
+}
+</style>
+</head>
+<body>
+
+<div class="shell" id="shell">
+<aside class="sidebar">
+  <div class="brand">
+    <img src="data:image/png;base64,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" alt="ECom GreenWay">
+    <div>
+      <div class="eyebrow">Đề xuất chương trình</div>
+      <div class="title">Đồng hành chuyên gia 1:1</div>
+      <div class="sub">6 tháng · 26 buổi 1:1</div>
+    </div>
+  </div>
+  <nav class="navlist" aria-label="Mục lục">
+    <div class="group-label">Đọc trước</div>
+    <a class="navitem active" href="#p1" data-target="p1" data-crumb="01 · Bối cảnh & câu hỏi" data-title="Làm thế nào để một chuyên gia đã có nghề có khách trả phí đều và xây được business của mình trong 6 tháng?"><span class="hex">1</span>Tổng quan</a>
+    <div class="group-label">Chương trình</div>
+    <a class="navitem" href="#p2" data-target="p2" data-crumb="02 · Ba kết quả" data-title="Sau 6 tháng bạn có định vị để làm, có khách trả phí đều, và nhìn rõ đường đi 12 tháng tới"><span class="hex">2</span>Ba kết quả</a>
+    <a class="navitem" href="#p3" data-target="p3" data-crumb="03 · Cách làm" data-title="Định vị bản nháp, đi bán ngay, rồi để chính khách trả tiền giúp bạn chốt ngách"><span class="hex">3</span>Cách làm</a>
+    <a class="navitem" href="#p4" data-target="p4" data-crumb="04 · Lộ trình 6 tháng" data-title="Ba chặng trong 6 tháng, mỗi chặng có một câu hỏi phải trả lời và đầu ra bạn cầm được"><span class="hex">4</span>Lộ trình</a>
+    <div class="group-label">Cùng nhau</div>
+    <a class="navitem" href="#p5" data-target="p5" data-crumb="05 · Đồng hành & cam kết" data-title="26 buổi 1:1 trong 6 tháng, đo bằng bốn con số mà chính bạn đặt mức"><span class="hex">5</span>Cam kết</a>
+    <a class="navitem gold" href="#p6" data-target="p6" data-crumb="06 · Về mình & bước tiếp theo" data-title="Người đồng hành đã tự đóng gói tri thức thành chương trình đào tạo và đang sống với nghề đó"><span class="hex">6</span>Bước tiếp<span class="navnum">60'</span></a>
+  </nav>
+  <div class="sidebar-foot">
+    <div class="row"><span>Dành cho</span><span>người sắp đặt lịch</span></div>
+    <div class="row"><span>Thời gian đọc</span><span>~5 phút</span></div>
+    <a class="cta-side" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a>
+    <button class="btn-all" id="btnAll" type="button">Xem một trang</button>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div>
+      <div class="crumb" id="crumb">01 · Bối cảnh & câu hỏi</div>
+      <h1 id="pageTitle">Làm thế nào để một chuyên gia đã có nghề có khách trả phí đều và xây được business của mình trong 6 tháng?</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="pill">6 tháng · 26 buổi 1:1</span>
+      <span class="pill gold">Nhận 3 người đầu tiên</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+  <!-- ===== 1 · TỔNG QUAN ===== -->
+  <section class="panel active" id="p1">
+    <h2 class="panel-title">1 · Tổng quan</h2>
+
+    <div class="cover">
+      <div class="eyebrow">Đề xuất chương trình · Chuyên gia</div>
+      <h2>Chuyên gia xây dựng business có khách hàng</h2>
+      <p>Mình là Bùi Ngọc Bình, Founder ECom GreenWay, đã đóng gói chuyên môn Amazon thành chương trình đào tạo có khách trả phí, và đang đồng hành 1:1 với các chuyên gia.</p>
+    </div>
+
+    <p class="lede">Gần đây mình trò chuyện kỹ với nhiều anh chị em làm nghề, coach, đào tạo hay tư vấn, thì điểm chung là họ <b>không thiếu chuyên môn</b> mà kẹt ở ba chỗ dưới đây.</p>
+
+    <div class="contract">
+      <div class="cline"><span>Trang này dành cho</span><span>Bạn đọc khoảng 5 phút, rồi đặt lịch trò chuyện 60 phút với mình.</span></div>
+      <div class="cline"><span>Chưa có ở đây</span><span><b>Phí hợp tác.</b> Mình trao đổi trực tiếp trong buổi, sau khi hiểu điểm xuất phát của bạn.</span></div>
+    </div>
+
+    <div class="situ">
+      <div class="have">
+        <div class="eyebrow">Nền bạn đang có</div>
+        <ul>
+          <li>Một nghề vững, nhiều năm kinh nghiệm, đã có kết quả với khách.</li>
+          <li>Đã có hướng định vị, dù chưa sắc.</li>
+          <li>Đã có khách, phần lớn qua giới thiệu, nhưng chưa đều so với mục tiêu.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:8px">Ba chỗ đang kẹt</div>
+        <div class="pains">
+          <div class="pain"><span class="k">Định vị chưa sắc</span><p>Bạn có hướng rồi, nhưng chưa nói được trong một câu mình phục vụ ai và khác người khác ở đâu.</p></div>
+          <div class="pain"><span class="k">Khách chưa đều</span><p>Khách giới thiệu có, mà không đủ và không đều so với mục tiêu, vì chưa có cách chủ động tạo khách mới.</p></div>
+          <div class="pain"><span class="k">Bị ngợp phần kinh doanh</span><p>Lâu nay bạn tập trung vào chuyên môn, nên phần kinh doanh nhìn đâu cũng thấy việc, không biết bắt đầu từ đâu.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2>Chương trình này có hợp với bạn không</h2></div>
+      <div class="fit">
+        <div class="card yes"><span class="eyebrow">Hợp với bạn nếu</span><p>Bạn đã có nghề vững, có hướng định vị và khách giới thiệu, muốn khách đều hơn mà không tự loay hoay phần kinh doanh, và sẵn sàng cam kết cả tiền và việc mỗi tuần.</p></div>
+        <div class="card no"><span class="eyebrow">Chưa hợp nếu</span><p>Bạn còn đang tìm nghề hoặc chưa có khách nào, hoặc đã có khách đều và cần tách mình khỏi vận hành. Khi đó mình nói thẳng và gợi ý hướng khác.</p></div>
+      </div>
+      <p class="soft-cta">Thấy đúng là mình thì bạn <a href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">đặt lịch 60 phút với mình</a> luôn, không cần đọc hết trang.</p>
+    </div>
+  </section>
+
+  <!-- ===== 2 · BA KẾT QUẢ ===== -->
+  <section class="panel" id="p2">
+    <h2 class="panel-title">2 · Ba kết quả</h2>
+    <div class="goal">Đích cuối mà mình hướng tới là bạn xây dựng được một business <b>CÓ KHÁCH HÀNG</b> trên chính chuyên môn bạn đang có, để bạn tập trung vào nghề thay vì tự loay hoay phần kinh doanh.</div>
+
+    <div class="res">
+      <div class="r">
+        <div class="r-top"><span class="n">1</span><h3>Có định vị để làm</h3></div>
+        <p class="from">Từ: có hướng định vị nhưng chưa sắc</p>
+        <ul>
+          <li><b>Hiểu khách hàng:</b> ai đang cần bạn và họ đau ở đâu.</li>
+          <li><b>Hiểu thị trường và đối thủ:</b> người khác đang bán gì, bán giá nào, bạn khác họ ở đâu.</li>
+          <li><b>Hiểu mình:</b> điều bạn giỏi, thích làm và kiểu khách muốn phục vụ lâu dài.</li>
+        </ul>
+        <div class="got"><b>Bạn cầm được</b>Một câu định vị sắc hơn mang đi bán được ngay, kèm 2–3 giả thuyết ngách để thử với khách thật.</div>
+      </div>
+      <div class="r">
+        <div class="r-top"><span class="n">2</span><h3>Có khách trả phí đều</h3></div>
+        <p class="from">Từ: khách chưa đều</p>
+        <ul>
+          <li><b>Khách mới ngoài vòng giới thiệu:</b> chủ động mở cuộc trò chuyện, viết đề xuất (proposal) và mời hợp tác.</li>
+          <li><b>Giới thiệu và lời chứng thực:</b> thoả thuận với khách từ đầu, để khách cũ giới thiệu khách mới.</li>
+          <li><b>Hệ thống nội dung vừa sức</b>, mở sau khi đã có khách, để đúng người đang cần tìm tới bạn.</li>
+        </ul>
+        <div class="got"><b>Bạn cầm được</b>Một cách bán đã thử với khách thật: lời mời hợp tác, đề xuất, thoả thuận lời chứng thực và cách để khách cũ giới thiệu khách mới.</div>
+      </div>
+      <div class="r">
+        <div class="r-top"><span class="n">3</span><h3>Rõ ràng</h3></div>
+        <p class="from">Từ: bị ngợp</p>
+        <ul>
+          <li><b>Mô hình kinh doanh</b> trên một trang.</li>
+          <li><b>Thang sản phẩm</b> có nội dung thật ở từng bậc, bắt đầu từ một gói chính có giá.</li>
+          <li><b>Kế hoạch kinh doanh 12 tháng</b> lập từ số liệu thật của những khách mới đầu tiên.</li>
+        </ul>
+        <div class="got"><b>Bạn cầm được</b>Một gói chính có nội dung và giá, một kế hoạch 12 tháng bạn tin được vì số trong đó là số thật.</div>
+      </div>
+    </div>
+
+    <p class="after">Số khách và doanh thu phụ thuộc điểm xuất phát và việc bạn làm mỗi tuần, nên mình không hứa trước con số.</p>
+
+    <div class="band">
+      <div><b>Tháng 1–2</b>Định vị sắc hơn và khách mới đầu tiên</div>
+      <div><b>Tháng 3–4</b>Khách trả phí và lời chứng thực</div>
+      <div><b>Tháng 5–6</b>Rõ ràng để đi đường dài</div>
+    </div>
+  </section>
+
+  <!-- ===== 3 · CÁCH LÀM ===== -->
+  <section class="panel" id="p3">
+    <h2 class="panel-title">3 · Cách làm</h2>
+    <p class="lede">Người đã có hướng mà đòi chốt ngách thật chắc rồi mới dám chào bán rộng thì rất dễ kẹt nhiều tháng, nên chương trình cho hai việc <b>định vị và tìm khách chạy song song</b> ngay từ tháng đầu.</p>
+
+    <div class="tablewrap"><table>
+      <thead><tr><th></th><th>Cách thường gặp</th><th class="ours">Cách của chương trình</th></tr></thead>
+      <tbody>
+        <tr><td class="row">Định vị</td><td>Chốt ngách thật chắc rồi mới dám bán</td><td class="ours">Bản nháp đủ để bán, khách thật giúp chốt ngách</td></tr>
+        <tr><td class="row">Sản phẩm</td><td>Dựng cả thang nhiều bậc ngay từ đầu</td><td class="ours">Tháng đầu chỉ một gói chính, có nội dung thật và có giá</td></tr>
+        <tr><td class="row">Kế hoạch</td><td>Lập kế hoạch 12 tháng từ hình dung</td><td class="ours">Lập sau khi có 2–3 khách mới, nên số trong kế hoạch là số thật</td></tr>
+        <tr><td class="row">Lời chứng thực</td><td>Làm xong mới xin, nhiều khi ngại hỏi</td><td class="ours">Thoả thuận với khách ngay từ đầu, bật từ người khách mới đầu tiên</td></tr>
+        <tr><td class="row">Nội dung</td><td>Đăng đều rồi chờ người tìm tới</td><td class="ours">Mở sau khi đã có khách và lời chứng thực, với nhịp vừa sức</td></tr>
+        <tr><td class="row">Tự tin</td><td>Học thêm cho thật đủ rồi mới tự tin</td><td class="ours">Tự tin lớn lên qua từng vòng: khách mới, kết quả, lời chứng thực, bán tiếp</td></tr>
+      </tbody>
+    </table></div>
+    <div class="swipe">← vuốt ngang để xem hết bảng →</div>
+
+  </section>
+
+  <!-- ===== 4 · LỘ TRÌNH ===== -->
+  <section class="panel" id="p4">
+    <h2 class="panel-title">4 · Lộ trình 6 tháng</h2>
+    <p class="lede">Đây là lộ trình đề xuất chung. Mốc tháng theo đúng điểm xuất phát của bạn sẽ nằm trong đề xuất riêng sau cuộc trò chuyện, còn <b>thứ tự ba chặng thì giữ</b>.</p>
+
+    <div class="phases">
+      <div class="ph">
+        <div class="ph-head"><b>Định vị sắc hơn và khách mới đầu tiên</b><span>CHẶNG 1 · THÁNG 1–2</span></div>
+        <div class="ph-body">
+          <div class="q">Mình bán gì, cho ai, đủ rõ để mang đi bán ngay chưa?</div>
+          <div class="lbl">Hoạt động chính</div>
+          <ul>
+            <li>Soi điểm xuất phát qua ba nhánh: khách hàng, thị trường và chính mình</li>
+            <li>Viết lại câu định vị cho sắc và 2–3 giả thuyết ngách</li>
+            <li>Dựng một gói chính có nội dung thật và giá</li>
+            <li>Chủ động mở những cuộc trò chuyện bán hàng đầu tiên, viết đề xuất cho khách mới đầu tiên</li>
+          </ul>
+          <div class="out"><b>Đầu ra chính</b>Câu định vị sắc hơn · Gói chính có giá · Đề xuất đầu tiên đã gửi</div>
+        </div>
+      </div>
+      <div class="ph">
+        <div class="ph-head"><b>Khách trả phí và lời chứng thực</b><span>CHẶNG 2 · THÁNG 3–4</span></div>
+        <div class="ph-body">
+          <div class="q">Khách nào chịu trả tiền, vì sao họ trả, và họ nói gì về kết quả?</div>
+          <div class="lbl">Hoạt động chính</div>
+          <ul>
+            <li>Đồng hành những khách mới trả phí tới kết quả</li>
+            <li>Thu lời chứng thực theo thoả thuận từ đầu</li>
+            <li>Mở chương trình để khách cũ giới thiệu khách mới</li>
+            <li>Dùng phản hồi của khách thật để chốt ngách</li>
+          </ul>
+          <div class="out"><b>Đầu ra chính</b>Khách trả phí · Lời chứng thực đầu tiên · Ngách đã chốt bằng khách thật</div>
+        </div>
+      </div>
+      <div class="ph">
+        <div class="ph-head"><b>Rõ ràng để đi đường dài</b><span>CHẶNG 3 · THÁNG 5–6</span></div>
+        <div class="ph-body">
+          <div class="q">12 tháng tới bạn đi đâu, và đo đường đi đó bằng số nào?</div>
+          <div class="lbl">Hoạt động chính</div>
+          <ul>
+            <li>Vẽ mô hình kinh doanh trên một trang</li>
+            <li>Mở rộng thang sản phẩm khi gói chính đã chạy</li>
+            <li>Lập kế hoạch 12 tháng từ số thật của những khách mới</li>
+            <li>Dựng nhịp nội dung vừa sức để đúng người tìm tới</li>
+          </ul>
+          <div class="out"><b>Đầu ra chính</b>Mô hình kinh doanh · Thang sản phẩm · Kế hoạch 12 tháng · Nhịp nội dung</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rhythm"><b>Nhịp:</b> mỗi tuần một buổi 1:1. Giữa hai buổi bạn mang việc đã thống nhất ra làm với khách thật, rồi kết quả và phản hồi của thị trường là chất liệu cho buổi kế tiếp.</div>
+  </section>
+
+  <!-- ===== 5 · ĐỒNG HÀNH & CAM KẾT ===== -->
+  <section class="panel" id="p5">
+    <h2 class="panel-title">5 · Đồng hành & cam kết</h2>
+    <p class="lede">Mỗi tuần một buổi, <b>xen kẽ một buổi làm sâu và một buổi check-in ngắn</b>, nên trong 6 tháng mình gặp nhau 26 buổi và tuần nào cũng có việc thật để mang vào buổi.</p>
+
+    <div class="sec" style="margin-top:0">
+      <div class="sec-head"><h2>Bốn con số theo dõi</h2><span class="pill gray">mức phải đạt do bạn tự đặt</span></div>
+      <div class="kpi-grid">
+        <div class="card kpi"><span class="kpi-label">Số cuộc trò chuyện bán hàng</span><span class="fill">mức: bạn đặt</span></div>
+        <div class="card kpi"><span class="kpi-label">Số đề xuất đã gửi</span><span class="fill">mức: bạn đặt</span></div>
+        <div class="card kpi"><span class="kpi-label">Số khách trả phí</span><span class="fill">mức: bạn đặt</span></div>
+        <div class="card kpi"><span class="kpi-label">Số lời chứng thực thu được</span><span class="fill">mức: bạn đặt</span></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2>Phân vai rõ để bạn biết mình cầm phần nào</h2></div>
+      <div class="lanes">
+        <div class="lane"><b>Bạn</b><ul>
+          <li>Tự viết định vị, mục tiêu và giá của mình</li>
+          <li>Tự đi bán và làm việc với khách của bạn</li>
+          <li>Mang kết quả thật vào từng buổi</li>
+        </ul></div>
+        <div class="lane me"><b>Mình</b><ul>
+          <li>Đặt câu hỏi để bạn nhìn rõ</li>
+          <li>Đưa khung và công cụ để bạn không phải mày mò</li>
+          <li>Phản biện, soát kết quả mỗi tuần</li>
+          <li>Chia sẻ kinh nghiệm khi bạn cần</li>
+        </ul></div>
+      </div>
+      <div class="bound"><b>Ranh giới trách nhiệm</b>Mình không hứa trước số khách hay doanh thu, vì kết quả phụ thuộc điểm xuất phát và việc bạn làm mỗi tuần. Thứ mình cam kết là nhịp đồng hành đều đặn và chất lượng của từng buổi.</div>
+      <div class="bound"><b>Cách mình nhận phí</b>Một phần cố định và một phần theo doanh thu mới của bạn, nên mình có phần trong kết quả của bạn. Con số cụ thể mình nói trong buổi 60 phút.</div>
+    </div>
+
+    <div class="promise">
+      <div class="eyebrow">Cam kết với 3 người đầu tiên</div>
+      <p>Mình <b>HOÀN LẠI 100% PHẦN PHÍ CỐ ĐỊNH</b> nếu sau 1 tháng làm việc cùng nhau mà bạn không hài lòng.</p>
+      <p>Đổi lại, ngay từ lúc bắt đầu bạn đồng ý để mình dùng lời chứng thực của bạn khi bạn có kết quả, và bạn là người duyệt câu chữ trước khi mình dùng.</p>
+    </div>
+
+    <p class="after">Sau chương trình, khi cần bạn vẫn có thể hỏi mình, mình giải đáp trên tinh thần hỗ trợ, và bạn được ưu đãi dành cho người đã đi cùng mình ở các chương trình mình tổ chức sau này.</p>
+  </section>
+
+  <!-- ===== 6 · VỀ MÌNH & BƯỚC TIẾP ===== -->
+  <section class="panel" id="p6">
+    <h2 class="panel-title">6 · Về mình & bước tiếp theo</h2>
+
+    <div class="profile">
+      <div class="me-card">
+        <img src="data:image/jpeg;base64,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" alt="Bùi Ngọc Bình">
+        <div class="nm">Bùi Ngọc Bình</div>
+        <div class="rl">Founder · ECom GreenWay</div>
+        <div class="stats">
+          <div><span class="num">10 năm+</span>thương mại điện tử</div>
+          <div><span class="num">5+ năm</span>Amazon seller thực chiến</div>
+          <div><span class="num">$3M+/năm</span>hệ thống Amazon đang vận hành</div>
+        </div>
+      </div>
+      <div class="creds">
+        <div class="cred"><b>Đã đóng gói tri thức thành chương trình</b>Biến kinh nghiệm vận hành Amazon thành các chương trình đào tạo của ECom GreenWay, và là đối tác đào tạo chính thức Amazon Global Selling Việt Nam.</div>
+        <div class="cred"><b>Cách làm: bạn cầm bút, mình hỏi và soát bằng số</b>Mình coach theo khung năng lực ICF, đặt câu hỏi và phản biện để bạn tự tìm ra câu trả lời của mình, rồi mỗi tuần soát lại bằng số thật.</div>
+        <div class="cred"><b>Đang đi cùng con đường này</b>Đang đồng hành 1:1 dài hạn với các chuyên gia và coach, và vẫn đang đi học thêm về đóng gói sản phẩm tri thức, tức là chính việc mình mời bạn làm.</div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2>Bước tiếp theo: cuộc trò chuyện 60 phút</h2></div>
+      <div class="steps">
+        <div class="step"><span class="n">01 · ĐẶT LỊCH</span><b>Bạn chọn giờ và kể ngắn gọn</b>Chọn giờ trống trên lịch của mình, rồi ghi hai dòng vào phần ghi chú: bạn đang làm nghề gì và khách hiện chủ yếu đến từ đâu.</div>
+        <div class="step"><span class="n">02 · TRONG BUỔI</span><b>Hai bên cùng xem có hợp không</b>Mình hiểu điểm xuất phát của bạn, bạn hỏi mình những gì bạn cần hỏi.</div>
+        <div class="step"><span class="n">03 · SAU BUỔI</span><b>Đề xuất riêng cho bạn</b>Nếu hợp, mình gửi bạn một đề xuất riêng, gồm lộ trình theo đúng điểm xuất phát của bạn và phí hợp tác như đã trao đổi trong buổi.</div>
+      </div>
+      <div class="callout"><b>Việc của bạn bây giờ</b> là ấn vào nút dưới để đặt lịch và ghi hai dòng ở bước 01, để buổi 60 phút đi thẳng vào chuyện của bạn.<br><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch trò chuyện 60 phút</a></div>
+      <p class="sign">Bùi Ngọc Bình</p>
+    </div>
+  </section>
+
+  </div>
+  <footer class="src">Khung chương trình "Chuyên gia xây dựng business có khách hàng" của BinhBN · Bạn cầm bút, mình hỏi và soát bằng số · Phí hợp tác trao đổi trong cuộc trò chuyện 60 phút.</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  var shell=document.getElementById('shell');
+  var items=document.querySelectorAll('.navitem');
+  var crumb=document.getElementById('crumb'), title=document.getElementById('pageTitle');
+  function show(id, push){
+    var target=document.getElementById(id); if(!target) return;
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.id===id)});
+    items.forEach(function(n){
+      var on=n.dataset.target===id; n.classList.toggle('active',on);
+      if(on){crumb.textContent=n.dataset.crumb; title.textContent=n.dataset.title;}
+    });
+    if(push){try{history.replaceState(null,'','#'+id);}catch(e){}}
+    if(!shell.classList.contains('all')){window.scrollTo({top:0});}
+    else{target.scrollIntoView({block:'start'});}
+  }
+  items.forEach(function(n){n.addEventListener('click',function(e){e.preventDefault();show(n.dataset.target,true);});});
+  var h=(location.hash||'').replace('#',''); if(h&&document.getElementById(h)){show(h,false);}
+  var btn=document.getElementById('btnAll');
+  btn.addEventListener('click',function(){
+    var all=shell.classList.toggle('all');
+    btn.textContent=all?'Xem từng phần':'Xem một trang';
+  });
+})();
+</script>
+</body>
+</html>
