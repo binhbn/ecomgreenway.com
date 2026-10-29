@@ -261,6 +261,11 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
 .cta-strip{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--surface-tint);border:1px solid var(--green-200);border-left:5px solid var(--gold-500);border-radius:0 12px 12px 0;padding:16px 20px;margin-top:24px}
 .cta-strip p{font-size:16px;color:var(--green-900);font-weight:500;max-width:60ch}
 .cta-strip .cta-btn{margin-top:0;flex:0 0 auto;white-space:nowrap}
+.cta-act{display:grid;gap:4px;justify-items:center;flex:0 0 auto}
+.free{display:block;font-size:12px;color:var(--text-muted);line-height:1.4}
+.callout .cta-act{justify-items:start;margin-top:4px}
+.cta-side small{display:block;font-family:var(--font-body);font-weight:500;font-size:12px;margin-top:2px}
+.cta-side .short{display:none}
 
 @media (prefers-reduced-motion:no-preference){.btn-all,.navitem{transition:background .15s ease,opacity .15s ease}}
 @media (max-width:900px){
@@ -291,6 +296,9 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
   .tl{display:none}
   .cta-strip{padding:14px 16px}
   .cta-strip .cta-btn{width:100%;text-align:center;white-space:normal}
+  .cta-act{width:100%}
+  .cta-side .long{display:none}
+  .cta-side .short{display:inline}
 }
 @media (max-width:640px){
   .fit,.lanes,.kpi-grid{grid-template-columns:1fr}
@@ -336,7 +344,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
   <div class="sidebar-foot">
     <div class="row"><span>Dành cho</span><span>người sắp đặt lịch</span></div>
     <div class="row"><span>Thời gian đọc</span><span>~5 phút</span></div>
-    <a class="cta-side" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a>
+    <a class="cta-side" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút<small><span class="long">Miễn phí · chọn giờ bạn rảnh</span><span class="short">Miễn phí</span></small></a>
     <button class="btn-all" id="btnAll" type="button">Xem một trang</button>
   </div>
 </aside>
@@ -370,7 +378,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
     <p class="lede">Gần đây mình trò chuyện kỹ với nhiều anh chị em làm nghề, coach, đào tạo hay tư vấn, thì điểm chung là họ <b>không thiếu chuyên môn</b> mà kẹt ở ba chỗ dưới đây.</p>
 
     <div class="contract">
-      <div class="cline"><span>Trang này dành cho</span><span>Bạn đọc khoảng 5 phút, rồi đặt lịch trò chuyện 60 phút với mình.</span></div>
+      <div class="cline"><span>Trang này dành cho</span><span>Bạn đọc khoảng 5 phút, rồi đặt lịch 60 phút với mình.</span></div>
       <div class="cline"><span>Chưa có ở đây</span><span><b>Phí hợp tác.</b> Mình trao đổi trực tiếp trong buổi, sau khi hiểu điểm xuất phát của bạn.</span></div>
     </div>
 
@@ -400,7 +408,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
         <div class="card yes"><span class="eyebrow">Hợp với bạn nếu</span><p>Bạn đã có nghề vững, có hướng định vị và khách giới thiệu, muốn khách đều hơn mà không tự loay hoay phần kinh doanh, và sẵn sàng cam kết cả tiền và việc mỗi tuần.</p></div>
         <div class="card no"><span class="eyebrow">Chưa hợp nếu</span><p>Bạn còn đang tìm nghề hoặc chưa có khách nào, hoặc đã có khách đều và cần tách mình khỏi vận hành. Khi đó mình nói thẳng và gợi ý hướng khác.</p></div>
       </div>
-      <div class="cta-strip"><p>Thấy đúng là mình thì đặt lịch luôn, không cần đọc hết trang.</p><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a></div>
+      <div class="cta-strip"><p>Thấy đúng là mình thì đặt lịch luôn.</p><div class="cta-act"><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a><small class="free">Miễn phí · chọn giờ bạn rảnh</small></div></div>
     </div>
   </section>
 
@@ -442,14 +450,14 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
       </div>
     </div>
 
-    <p class="after">Số khách và doanh thu tuỳ điểm xuất phát và việc bạn làm mỗi tuần, nên mình không hứa trước con số.</p>
+    <p class="after">Mình không hứa trước số khách hay doanh thu, vì nó tuỳ việc bạn làm mỗi tuần.</p>
 
     <div class="band">
       <div><b>Tháng 1–2</b>Định vị sắc hơn và khách mới đầu tiên</div>
       <div><b>Tháng 3–4</b>Khách trả phí và lời chứng thực</div>
       <div><b>Tháng 5–6</b>Rõ ràng để đi đường dài</div>
     </div>
-    <div class="cta-strip"><p>Áp ba kết quả này vào nghề của bạn thế nào, mình nói trong 60 phút.</p><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a></div>
+    <div class="cta-strip"><p>Áp vào nghề của bạn thế nào, mình nói trong 60 phút.</p><div class="cta-act"><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a><small class="free">Miễn phí · chọn giờ bạn rảnh</small></div></div>
   </section>
 
   <!-- ===== 3 · CÁCH LÀM ===== -->
@@ -480,7 +488,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
       </tbody>
     </table></div>
     <div class="swipe">← vuốt ngang để xem hết bảng →</div>
-    <div class="cta-strip"><p>Cách này có hợp với nghề của bạn không, mình cùng xem trong 60 phút.</p><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a></div>
+    <div class="cta-strip"><p>Cách này có hợp với nghề của bạn không, mình cùng xem trong 60 phút.</p><div class="cta-act"><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a><small class="free">Miễn phí · chọn giờ bạn rảnh</small></div></div>
   </section>
 
   <!-- ===== 4 · LỘ TRÌNH ===== -->
@@ -516,7 +524,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
           <ul>
             <li>Đồng hành những khách mới trả phí tới kết quả</li>
             <li>Thu lời chứng thực theo thoả thuận từ đầu</li>
-            <li>Mở chương trình để khách cũ giới thiệu khách mới</li>
+            <li>Mở cách để khách cũ giới thiệu khách mới</li>
             <li>Dùng phản hồi của khách thật để chốt ngách</li>
           </ul>
           <div class="out"><b>Đầu ra chính</b>Khách trả phí · Lời chứng thực đầu tiên · Ngách đã chốt bằng khách thật</div>
@@ -531,7 +539,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
             <li>Vẽ mô hình kinh doanh trên một trang</li>
             <li>Mở rộng thang sản phẩm khi gói chính đã chạy</li>
             <li>Lập kế hoạch 12 tháng từ số thật của những khách mới</li>
-            <li>Dựng nhịp nội dung vừa sức để đúng người tìm tới</li>
+            <li>Dựng nhịp nội dung vừa sức</li>
           </ul>
           <div class="out"><b>Đầu ra chính</b>Mô hình kinh doanh · Thang sản phẩm · Kế hoạch 12 tháng · Nhịp nội dung</div>
         </div>
@@ -539,7 +547,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
     </div>
 
     <div class="rhythm"><b>Nhịp:</b> mỗi tuần một buổi 1:1. Giữa hai buổi bạn mang việc đã thống nhất ra làm với khách thật; kết quả là chất liệu cho buổi kế tiếp.</div>
-    <div class="cta-strip"><p>Mốc tháng của riêng bạn bắt đầu từ buổi trò chuyện 60 phút.</p><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a></div>
+    <div class="cta-strip"><p>Mốc tháng của riêng bạn bắt đầu từ buổi 60 phút.</p><div class="cta-act"><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a><small class="free">Miễn phí · chọn giờ bạn rảnh</small></div></div>
   </section>
 
   <!-- ===== 5 · ĐỒNG HÀNH & CAM KẾT ===== -->
@@ -588,7 +596,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
     </div>
 
     <p class="after">Sau chương trình bạn vẫn hỏi được mình trên tinh thần hỗ trợ, và có ưu đãi dành cho người đã đi cùng mình ở các chương trình sau.</p>
-    <div class="cta-strip"><p>Phí hợp tác và cam kết cụ thể, mình nói thẳng trong 60 phút.</p><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a></div>
+    <div class="cta-strip"><p>Phí hợp tác và cam kết cụ thể, mình nói thẳng trong 60 phút.</p><div class="cta-act"><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch 60 phút</a><small class="free">Miễn phí · chọn giờ bạn rảnh</small></div></div>
   </section>
 
   <!-- ===== 6 · VỀ MÌNH & BƯỚC TIẾP ===== -->
@@ -620,7 +628,7 @@ td.row .ic{display:inline-block;vertical-align:-5px;margin-right:6px;color:var(-
         <div class="step"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg><span class="n">02 · TRONG BUỔI</span><b>Hai bên cùng xem có hợp không</b>Mình hiểu điểm xuất phát của bạn, bạn hỏi mình những gì bạn cần hỏi.</div>
         <div class="step"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg><span class="n">03 · SAU BUỔI</span><b>Đề xuất riêng cho bạn</b>Nếu hợp, mình gửi bạn một đề xuất riêng, gồm lộ trình theo đúng điểm xuất phát của bạn và phí hợp tác như đã trao đổi trong buổi.</div>
       </div>
-      <div class="callout"><b>Việc của bạn bây giờ</b> là ấn vào nút dưới để đặt lịch và ghi hai dòng ở bước 01, để buổi 60 phút đi thẳng vào chuyện của bạn.<br><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch trò chuyện 60 phút</a></div>
+      <div class="callout"><b>Việc của bạn bây giờ</b> là ấn vào nút dưới để đặt lịch và ghi hai dòng ở bước 01, để buổi 60 phút đi thẳng vào chuyện của bạn.<div class="cta-act"><a class="cta-btn" href="https://cal.com/buingocbinh/60min" target="_blank" rel="noopener">Đặt lịch trò chuyện 60 phút</a><small class="free">Miễn phí · chọn giờ bạn rảnh</small></div></div>
       <p class="sign">Bùi Ngọc Bình</p>
     </div>
   </section>
